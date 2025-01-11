@@ -1,0 +1,579 @@
+\documentclass[a4paper,12pt]{article}
+
+% Packages
+\usepackage[utf8]{inputenc} % For UTF-8 encoding
+\usepackage[hungarian]{babel} % Hungarian language support
+\usepackage{amsmath, amssymb} % Math symbols and environments
+\usepackage{geometry} % Page geometry
+\usepackage{titlesec} % Section formatting
+\usepackage{enumitem} % Custom lists
+\usepackage{hyperref} % Hyperlinks
+\usepackage{fancyhdr} % Header and footer customization
+\usepackage{graphicx} % Include graphics
+
+% Page settings
+\geometry{margin=1in}
+
+% Title and author
+\title{\textbf{Biostatisztika Záróvizsga Tételek}}
+\author{Név: \textit{[Pinczés Dániel]}}
+\date{\today}
+
+% Header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Záróvizsga Tételek}
+\rhead{\thepage}
+
+% Section formatting
+\titleformat{\section}[block]{\bfseries\Large}{Tétel \thesection}{1em}{}
+\titleformat{\subsection}[block]{\bfseries\large}{\thesubsection}{1em}{}
+
+\begin{document}
+
+% Title Page
+\maketitle
+\thispagestyle{empty}
+\newpage
+
+% Table of Contents
+\tableofcontents
+\newpage
+
+% Example Sections for Topics
+\section{A biostatisztika áttekintése: kérdésfeltevések és alapproblémák}
+
+\textbf{Tétel}: 
+
+Tipikus problémák a biostatisztikában, a matematikailag megalapozott módszerek
+szükségessége az orvosbiológiai kutatások támogatásában. A humán empirikus orvosi
+kutatások módszerei, kísérlet és megfigyelés. A confounding fogalma. Védekezési
+lehetőségek a confounding ellen.
+
+\subsection{Tipikus problémák a biostatisztikában, a matematikailag megalapozott módszerek
+szükségessége az orvosbiológiai kutatások támogatásában.}
+Itt található az első tételhez tartozó első alcím részletezése.
+
+A biostatisztika az orvosi és biológiai kutatásokban felmerülő statisztikai kérdésekkel foglalkozik. Az "Az orvosi megismerés módszertana" című könyv számos példát hoz olyan kérdésekre, amelyek tipikusan előfordulnak az orvosi kutatásokban, és amelyek megválaszolásához statisztikai módszerekre van szükség. Ezek a kérdések általában ok-okozati összefüggések feltárására irányulnak.
+
+\begin{itemize}
+\item Környezeti tényezők és egészségügyi hatások
+
+"Okoz-e mentális betegséget a légszennyezettség?" (Forrás: 2. fejezet, 15. oldal) Ez a kérdés rávilágít arra, hogy a biostatisztikában gyakran vizsgálunk olyan problémákat, ahol egy környezeti tényező (jelen esetben a légszennyezettség) potenciális egészségügyi hatását szeretnénk felmérni.
+
+\item Technológiai fejlődés és egészségügyi kockázatok
+
+"A mobiltelefon-használat okoz-e agydaganatot?" (Forrás: 2. fejezet, 15. oldal) Ez a példa azt mutatja, hogy a biostatisztika fontos szerepet játszik az új technológiák potenciális egészségügyi kockázatainak értékelésében.
+
+\item Életmódbeli tényezők és betegségek kapcsolata 
+
+"A vöröshús-fogyasztás növeli-e a vastagbélrák kockázatát?" (Forrás: 2. fejezet, 15. oldal) Ez a kérdés rámutat arra, hogy a biostatisztika gyakran foglalkozik olyan problémákkal, amelyek az életmód és a betegségek közötti összefüggéseket vizsgálják.
+
+\item Orvosi beavatkozások hosszú távú hatásai
+
+"A császármetszéssel születés növeli-e az 1-es típusú cukorbetegség kockázatát?" (Forrás: 2. fejezet, 15. oldal) Ez a példa azt illusztrálja, hogy a biostatisztika fontos szerepet játszik az orvosi beavatkozások hosszú távú következményeinek értékelésében.
+
+
+\item Gyógyszerek hatékonyságának vizsgálata
+
+"Egy új vérnyomáscsökkentő gyógyszer tényleg csökkenti-e a vérnyomást?" (Forrás: 2. fejezet, 15-16. oldal) Ez a kérdés rávilágít arra, hogy a biostatisztika kulcsfontosságú a gyógyszerek hatékonyságának és biztonságosságának értékelésében.
+
+\end{itemize}
+
+Az "Az orvosi megismerés módszertana" című könyv hangsúlyozza, hogy a matematikailag megalapozott módszerek elengedhetetlenek az orvosbiológiai kutatások támogatásában. Ennek több oka is van:
+
+\begin{itemize}
+
+\item Az empirikus megfigyelések önmagukban félrevezetőek lehetnek
+
+A könyv rámutat, hogy pusztán a megfigyelésekre hagyatkozva téves következtetésekre juthatunk. Erre kiváló példa az érvágás esete, amelyet a könyv részletesen tárgyal. Az érvágást évszázadokon át alkalmazták különböző betegségek gyógyítására, anélkül, hogy bárki empirikusan megvizsgálta volna annak tényleges hatásosságát. (Forrás: 1. fejezet, 8-10. oldal)
+
+\item A véletlen ingadozás hatásának kezelése:
+
+A könyv kifejti, hogy az orvosi kutatásokban mindig jelen van a véletlen ingadozás. Ez azt jelenti, hogy még akkor is kaphatunk eltérő eredményeket, ha valójában nincs valódi különbség vagy hatás. A matematikai módszerek segítenek abban, hogy megkülönböztessük a valódi hatásokat a véletlen ingadozásoktól. (Forrás: 5. fejezet, 47-48. oldal)
+
+\item Ok-okozati összefüggések feltárása 
+
+A könyv hangsúlyozza, hogy az ok-okozati összefüggések feltárása komplex feladat. Nem elég csupán azt megállapítani, hogy két jelenség együtt jár, azt is ki kell mutatni, hogy az egyik okozza a másikat. Ehhez szükség van olyan matematikai módszerekre, amelyek képesek kezelni a zavaró tényezőket (confoundereket) és más komplex összefüggéseket. (Forrás: 2. fejezet, 16-17. oldal)
+
+\item A mintavételi hiba kezelése
+
+A könyv rámutat, hogy a kutatások során általában csak egy mintát tudunk vizsgálni, nem a teljes populációt. A matematikai módszerek segítenek abban, hogy a mintából nyert eredményeket megfelelően tudjuk általánosítani a teljes populációra. (Forrás: 5. fejezet, 64-65. oldal)
+
+\item A kutatások tervezése
+
+A matematikailag megalapozott módszerek nem csak az adatok elemzésében, hanem már a kutatások tervezésében is kulcsfontosságúak. A könyv részletesen tárgyalja, hogyan lehet meghatározni a szükséges mintaméretet, vagy hogyan lehet randomizálni a résztvevőket egy klinikai vizsgálatban. (Forrás: 5. fejezet, 68-71. oldal)
+
+\item A bizonytalanság számszerűsítése 
+
+A könyv kiemeli, hogy a matematikai módszerek lehetővé teszik a bizonytalanság számszerűsítését. Ez segít abban, hogy ne csak azt tudjuk meg, mi a legjobb becslésünk egy hatás nagyságára, hanem azt is, mennyire lehetünk biztosak ebben a becslésben. (Forrás: 5. fejezet, 53-55. oldal)
+
+\end{itemize}
+
+A könyv konkrét példaként említi James Lind skorbut elleni kísérletét és Pierre-Charles-Alexandre Louis érvágással kapcsolatos vizsgálatát, amelyek a szisztematikus, empirikus vizsgálatok fontosságát demonstrálják. (Forrás: 1. fejezet, 10-11. oldal)
+
+Saját kiegészítés: Fontos megjegyezni, hogy a matematikailag megalapozott módszerek nem helyettesítik, hanem kiegészítik az orvosi szakértelmet. A statisztikai eredmények értelmezéséhez és a klinikai gyakorlatba való átültetéséhez továbbra is szükség van az orvosok szakértelmére és tapasztalatára. A matematikai módszerek inkább eszközök, amelyek segítik az orvosokat a jobb döntéshozatalban és a tudományos bizonyítékok értékelésében.
+
+\subsection{A humán empirikus orvosi kutatások módszerei, kísérlet és megfigyelés}
+
+Az orvosi kutatásokban két fő módszert különböztetünk meg az empirikus vizsgálatok során: a kísérletet és a megfigyelést. A könyv részletesen tárgyalja mindkét módszert, kiemelve azok előnyeit és hátrányait.
+
+\subsubsection{Kísérlet}
+
+A kísérlet során a kutatók aktívan befolyásolják az expozíciót, vagyis azt a tényezőt, amelynek a hatását vizsgálni szeretnék.
+
+\begin{itemize}
+
+\item \textbf{Jellemzői}: A kutatók döntik el, ki kerül a kezelt és ki a kontroll csoportba. Lehetővé teszi a randomizációt, ami a leghatékonyabb módszer a confounding ellen. Általában kisebb mintamérettel dolgozik, mint a megfigyeléses vizsgálatok. Az utánkövetési idő gyakran korlátozott.
+
+\item \textbf{Példa}: James Lind skorbut elleni kísérlete, ahol a tengerészeket különböző csoportokba osztotta, és eltérő kezeléseket alkalmazott. (Forrás: 1. fejezet, 11. oldal)
+
+\item \textbf{Előnyök}: Lehetővé teszi az ok-okozati összefüggések közvetlen vizsgálatát.
+A randomizáció révén kiküszöböli a confounding hatását.
+
+\item \textbf{Hátrányok}: Etikai korlátok (pl. nem lehet szándékosan káros expozíciónak kitenni az alanyokat).
+Költséges és időigényes lehet.
+A résztvevők összetétele gyakran eltér a teljes populációétól. (Forrás: 3. fejezet, 27-30. oldal)
+
+\end{itemize}
+
+
+\subsubsection{Megfigyelés}
+
+A megfigyeléses vizsgálatok során a kutatók nem befolyásolják az expozíciót, csak megfigyelik és rögzítik az eseményeket.
+
+\begin{itemize}
+
+\item \textbf{Jellemzői}: A kutatók nem avatkoznak be az expozíció kiosztásába.
+Általában nagyobb mintamérettel dolgozik.
+Hosszabb utánkövetési idő lehetséges.
+A vizsgált populáció jobban reprezentálja a teljes populációt.
+Példa: A légszennyezettség és a mentális betegségek kapcsolatának vizsgálata, ahol a kutatók nem befolyásolják, ki él szennyezett területen. (Forrás: 2. fejezet, 15. oldal)
+
+\item  \textbf{Előnyök}: Etikailag kevésbé problémás.
+Nagyobb mintaméret és hosszabb utánkövetési idő lehetséges.
+Jobban reprezentálja a valós életbeli körülményeket.
+
+\item \textbf{Hátrányok}: Nehezebb az ok-okozati összefüggések megállapítása.
+A confounding problémája jelentősebb.
+\end{itemize}
+
+
+(Forrás: 3. fejezet, 28-30. oldal)
+
+A könyv hangsúlyozza, hogy mindkét módszernek megvan a maga helye az orvosi kutatásokban. A kísérletek erőssége, hogy jobban kontrollálhatók és alkalmasabbak ok-okozati összefüggések feltárására. A megfigyeléses vizsgálatok viszont jobban tükrözik a valós életbeli körülményeket, és olyan helyzetekben is alkalmazhatók, ahol a kísérletek etikailag vagy gyakorlatilag nem kivitelezhetők.
+
+A könyv egy érdekes példát hoz az ejtőernyők hatékonyságának vizsgálatára, ami jól szemlélteti a kétféle módszer közötti különbséget és azok korlátait. (Forrás: 3. fejezet, 30-31. oldal)
+
+Saját kiegészítés: Fontos megjegyezni, hogy a modern orvosi kutatásokban gyakran kombinálják a kétféle megközelítést. Például egy megfigyeléses vizsgálat eredményei alapján hipotéziseket állítanak fel, amelyeket aztán klinikai kísérletekben tesztelnek. Vagy fordítva, egy klinikai kísérlet eredményeit későbbi megfigyeléses vizsgálatokkal validálják a való életben. Ez a kombinált megközelítés segít kihasználni mindkét módszer előnyeit, miközben minimalizálja azok hátrányait.
+
+\subsection{A confounding fogalma}
+
+A confounding (zavaró tényező) az orvosi kutatások egyik legfontosabb és leggyakoribb problémája. A könyv részletesen tárgyalja ezt a jelenséget, annak jelentőségét és következményeit.
+
+\textbf{Definíció}: A confounding olyan változó, amely egyszerre összefügg az expozícióval (a vizsgált tényezővel) és a végponttal (a vizsgált kimenetellel), ezáltal torzíthatja az eredményeket és hamis összefüggéseket sugallhat. (Forrás: 2. fejezet, 17-18. oldal)
+
+Példa a könyvből: A könyv egy szemléletes példát hoz a légszennyezettség és a mentális betegségek kapcsolatának vizsgálatára. Ebben az esetben a szocioökonómiai helyzet lehet confounder, mert:
+
+\begin{itemize}
+
+\item Összefügg az expozícióval
+
+A rosszabb szocioökonómiai helyzetű emberek gyakrabban élnek szennyezettebb területeken.
+
+\item Összefügg a végponttal
+
+A rosszabb szocioökonómiai helyzetű emberek körében gyakoribbak a mentális betegségek.
+
+\end{itemize}
+
+Így, ha csak a légszennyezettség és a mentális betegségek előfordulása közötti kapcsolatot vizsgáljuk, tévesen azt gondolhatjuk, hogy a légszennyezettség okozza a mentális betegségeket, holott valójában a szocioökonómiai helyzet állhat mindkettő hátterében. (Forrás: 2. fejezet, 17-20. oldal)
+
+\textbf{A confounding hatása}
+
+\begin{itemize}
+
+\item Hamis összefüggéseket mutathat ki
+Olyan kapcsolatot sugallhat két változó között, amely valójában nem létezik.
+
+
+\item Elfedheti a valódi összefüggéseket
+Elképzelhető, hogy van valódi kapcsolat két változó között, de a confounder miatt ezt nem tudjuk kimutatni.
+
+
+\item Torzíthatja a hatás nagyságát
+Még ha van is valódi kapcsolat, a confounder miatt túl- vagy alulbecsülhetjük annak mértékét.
+\end{itemize}
+
+A confounding felismerésének nehézségei: A könyv hangsúlyozza, hogy a confounding felismerése nem mindig egyszerű. Néha nyilvánvaló lehet (mint a fenti példában), de gyakran rejtett és nehezen azonosítható. Ráadásul egy vizsgálatban több confounder is jelen lehet egyidejűleg, tovább bonyolítva a helyzetet. (Forrás: 2. fejezet, 19-20. oldal)
+
+A confounding jelentősége: A könyv kiemeli, hogy a confounding figyelmen kívül hagyása súlyos következményekkel járhat. Téves következtetésekre juthatunk az ok-okozati összefüggésekről, ami helytelen klinikai döntésekhez vagy közegészségügyi intézkedésekhez vezethet. (Forrás: 2. fejezet, 20-23. oldal)
+
+Történeti példa: A könyv egy érdekes történeti példát is hoz a confounding problémájára. A 18. században Daniel Bernoulli azt vizsgálta, hogy miért magasabb a halálozási ráta a városokban, mint vidéken. Első ránézésre úgy tűnt, hogy a városi élet káros az egészségre. Azonban Bernoulli rájött, hogy az életkor egy confounder ebben az esetben: a városokba több fiatal költözött munkát keresni, és mivel a fiatalok általában egészségesebbek, ez torzította az összehasonlítást. (Forrás: 2. fejezet, 21-22. oldal)
+
+Saját kiegészítés: Fontos megjegyezni, hogy a confounding problémája nem csak az orvosi kutatásokban, hanem minden olyan területen jelentkezhet, ahol ok-okozati összefüggéseket próbálunk feltárni. Például a társadalomtudományokban, a pszichológiában vagy akár a gazdasági elemzésekben is kulcsfontosságú a zavaró tényezők azonosítása és kezelése. Az orvosi kutatásokban azért különösen kritikus ez a kérdés, mert a téves következtetések közvetlenül befolyásolhatják az emberek egészségét és életét.
+
+\subsection{Védekezési lehetőségek a confounding ellen}
+
+A könyv több módszert is ismertet, amelyekkel védekezhetünk a confounding hatása ellen. Ezek a módszerek segítenek abban, hogy pontosabb és megbízhatóbb következtetéseket vonhassunk le az orvosi kutatásokban.
+
+\subsubsection{Randomizáció}
+
+Ez a módszer kísérletes vizsgálatokban alkalmazható.
+
+\begin{itemize}
+\item \textbf{Lényege}
+A résztvevőket véletlenszerűen osztjuk be a különböző csoportokba (pl. kezelt és kontroll csoport).
+
+\item \textbf{Előnye}
+Ez a leghatékonyabb módszer, mert minden confoundert kiszűr, még azokat is, amelyekre nem gondoltunk.
+
+\item \textbf{Történeti példa}:
+James Burns Amberson 1931-es kísérlete, ahol pénzfeldobással döntötte el, hogy ki kapjon sanocrysin-t a TBC kezelésére.
+
+\item \textbf{Működési elv}: 
+A randomizáció biztosítja, hogy a csoportok csak a vizsgált tényezőben (expozícióban) térjenek el egymástól, minden más szempontból hasonlóak legyenek.
+(Forrás: 3. fejezet, 26-27. oldal)
+
+\end{itemize}
+
+\subsubsection{Rétegzés}
+
+Ez a módszer megfigyeléses vizsgálatokban alkalmazható.
+
+\begin{itemize}
+\item \textbf{Lényege}: A confounding változó szerint rétegekre bontjuk a mintát, és rétegenként külön-külön végezzük el az elemzést.
+\item \textbf{Példa}: Ha az életkor a confounder, akkor külön vizsgáljuk az összefüggést a fiatalok, középkorúak és idősek csoportjában.
+\item \textbf{Előnye}: Egyszerű módszer, nem igényel bonyolult statisztikai eljárásokat.
+\item \textbf{Hátránya}: Ha sok confounder van, vagy folytonos változók (pl. életkor) esetén nehezen alkalmazható.
+\end{itemize}
+(Forrás: 4. fejezet, 33-35. oldal)
+
+\subsubsection{Standardizálás}
+
+Ez is megfigyeléses vizsgálatokban használatos módszer.
+
+\begin{itemize}
+\item \textbf{Lényege}: A confounding változó eloszlását egységesítjük a csoportok között, így téve összehasonlíthatóvá az eredményeket.
+\item \textbf{Példa}: A könyv részletesen tárgyalja a halálozási ráták standardizálását életkor szerint különböző országok összehasonlításakor.
+\item \textbf{Előnye}: Lehetővé teszi az összehasonlítást olyan esetekben is, amikor a csoportok összetétele nagyon eltérő.
+\item \textbf{Alkalmazás}: Gyakran használják epidemiológiai vizsgálatokban, például országok egészségügyi mutatóinak összehasonlításakor.
+\end{itemize}
+(Forrás: 4. fejezet, 35-43. oldal)
+
+\subsubsection{Többváltozós regressziós modellezés}
+
+A könyv említi, de részletesen nem tárgyalja ezt a módszert.
+
+\begin{itemize}
+\item \textbf{Lényege}: Statisztikai modelleket használunk, amelyek egyszerre több változó hatását tudják figyelembe venni.
+\item \textbf{Előnye}: Lehetővé teszi több confounder egyidejű kezelését.
+\item \textbf{Alkalmazás}: Széles körben használt módszer a modern orvosi kutatásokban.
+\end{itemize}
+
+(Forrás: 4. fejezet, 33. oldal)
+
+\subsubsection{Megfelelő kutatási terv}
+
+A könyv hangsúlyozza, hogy a confounding elleni védekezés már a kutatás tervezési fázisában elkezdődik.
+
+\begin{itemize}
+\item \textbf{Lényege}: Alapos előzetes tervezéssel azonosítjuk a potenciális confoundereket és beépítjük kezelésüket a kutatási tervbe.
+\item \textbf{Példa}: Adatgyűjtés során rögzítjük a releváns háttérváltozókat, amelyek később confounderként viselkedhetnek.
+\end{itemize}
+
+A könyv kiemeli, hogy a confounding kezelése kulcsfontosságú az orvosi kutatásokban, mert enélkül téves következtetésekre juthatunk az ok-okozati összefüggésekről. Ugyanakkor azt is hangsúlyozza, hogy a megfigyeléses vizsgálatokban soha nem lehetünk teljesen biztosak abban, hogy minden confoundert sikerült azonosítanunk és kezelnünk.
+
+Saját kiegészítés: Fontos megjegyezni, hogy a modern orvosi kutatásokban gyakran kombinálják ezeket a módszereket. Például egy megfigyeléses vizsgálatban alkalmazhatnak rétegzést és standardizálást is, majd az eredményeket többváltozós regressziós modellekkel ellenőrizhetik. Emellett az utóbbi években egyre nagyobb szerepet kapnak a fejlett statisztikai módszerek, mint például a propensity score matching vagy az instrumentális változók módszere, amelyek további lehetőségeket kínálnak a confounding kezelésére.
+
+
+\newpage
+
+\section{Az orvosi kutatások vizsgálati módszerei}
+
+\textbf{Tétel}: 
+
+A vizsgálati módszerek csoportosítása. Megfigyeléses vizsgálatok: egyedi adatok alapuló
+vizsgálatok (kohorsz, eset-kontroll), aggregált adatokon alapuló (ecological) vizsgálatok,
+kontroll nélküli vizsgálatok. Kísérletes vizsgálatok jellemzői. Metaanalízisek fogalma, szerepe,
+fontossága.
+
+\subsection{A vizsgálati módszerek csoportosítása}
+
+Az "Az orvosi megismerés módszertana" című könyv alapján az orvosi kutatásokban alkalmazott vizsgálati módszereket alapvetően három fő csoportba sorolhatjuk:
+
+\textbf{Megfigyeléses vizsgálatok}
+\begin{itemize} 
+\item A kutatók nem avatkoznak be az expozíció kiosztásába, csak megfigyelik és rögzítik az eseményeket.
+\item Ide tartoznak az egyedi és aggregált adatokon alapuló vizsgálatok, valamint a kontroll nélküli vizsgálatok.
+\end{itemize}
+
+\textbf{Kísérletes vizsgálatok}
+\begin{itemize} 
+\item A kutatók aktívan befolyásolják az expozíciót.
+\item Lehetővé teszik a randomizációt és a kontrollált körülmények közötti vizsgálatot.
+\end{itemize}
+
+\textbf{Metaanalízisek}
+\begin{itemize} 
+\item Több, azonos kérdést vizsgáló kutatás eredményeinek statisztikai összegzése.
+\item Nem új adatgyűjtésen, hanem meglévő kutatások szintézisén alapul.
+\end{itemize}
+
+A könyv hangsúlyozza, hogy mindegyik módszernek megvan a maga helye és szerepe az orvosi kutatásokban. A módszerek közötti választást befolyásoló fő tényezők:
+
+\begin{itemize} 
+\item A kutatási kérdés jellege
+\item Etikai megfontolások
+\item Gyakorlati megvalósíthatóság
+\item Rendelkezésre álló erőforrások
+\end{itemize}
+
+(Forrás: 3. fejezet, 27-30. oldal)
+
+\subsection{Megfigyeléses vizsgálatok}
+
+A megfigyeléses vizsgálatok olyan kutatási módszerek, ahol a kutatók nem avatkoznak be az expozíció kiosztásába, hanem passzívan figyelik meg és rögzítik az eseményeket. A könyv több típusú megfigyeléses vizsgálatot is tárgyal:
+
+\subsubsection{Egyedi adatokon alapuló vizsgálatok}
+
+\begin{enumerate}[label=(\alph*)]
+    
+    \item Kohorsz vizsgálatok
+
+\begin{itemize}
+\item textbf{Definíció}: Egy populációt hosszabb időn át követnek, és figyelik, hogy kik betegszenek meg.  
+
+\item \textbf{Jellemzők}: Prospektív jellegű (előre tekintő)
+Az expozíciótól haladnak a végpont felé
+Alkalmas ritka expozíciók vizsgálatára    
+
+\item  \textbf{Előnyök}: Időbeli sorrend tisztázható, több végpont is vizsgálható    
+
+\item \textbf{Hátrányok}: Hosszú idő, drága, nem alkalmas ritka betegségek vizsgálatára
+
+\item \textbf{Példa}: A Framingham Heart Study, amely 1948-ban kezdődött, és több ezer embert követett évtizedeken át, hogy azonosítsa a szív- és érrendszeri betegségek kockázati tényezőit. (Forrás: 4. fejezet, 34. oldal)
+\end{itemize}
+
+    \item Eset-kontroll vizsgálatok
+\begin{itemize}
+
+\item \textbf{Definíció}: Beteg (eset) és nem beteg (kontroll) csoportokat hasonlítanak össze a múltbeli expozíciók tekintetében.
+
+\item \textbf{Jellemzők}: Retrospektív jellegű (visszatekintő). A végponttól haladnak az expozíció felé. Alkalmas ritka betegségek vizsgálatára.
+
+
+\item \textbf{Előnyök}: Gyors, olcsó, jó ritka betegségekre
+
+\item \textbf{Hátrányok}: Nehéz megfelelő kontrollcsoportot találni, emlékezeti torzítás lehetősége
+ 
+\item \textbf{Példa}: Richard Doll és Austin Bradford Hill dohányzás és tüdőrák kapcsolatát vizsgáló kutatása az 1950-es években. Tüdőrákos betegeket (esetek) hasonlítottak össze nem tüdőrákos emberekkel (kontrollok), és vizsgálták a dohányzási szokásaikat. (Forrás: 4. fejezet, 35. oldal) 
+   
+\end{itemize}
+(Forrás: 4. fejezet, 33-35. oldal)
+
+ \end{enumerate}
+
+\subsubsection{Aggregált adatokon alapuló (ecological) vizsgálatok}
+
+\begin{itemize}
+
+\item  \textbf{Definíció}: Nem egyénekre, hanem csoportokra vonatkozó adatokat elemeznek.
+
+\item \textbf{Jellemzők}:
+Populáció szintű adatokat használnak
+Gyorsan és olcsón kivitelezhetők
+
+\item \textbf{Előnyök}: Nagy populációkat lehet vizsgálni, olcsó.
+
+\item \textbf{Hátrányok}: Ökológiai tévkövetkeztetés veszélye (amit csoportszinten látunk, nem feltétlenül igaz egyéni szinten)
+
+\item \textbf{Példa}: A könyv említi az országok közötti összehasonlításokat, például a halálozási ráták összehasonlítását különböző országokban. (Forrás: 4. fejezet, 38-41. oldal)
+
+
+\end{itemize}
+
+
+\subsubsection{Kontroll nélküli vizsgálatok}
+    
+\begin{itemize}
+
+\item \textbf{Definíció}: Egyetlen csoport megfigyelése kontrollcsoport nélkül.
+
+\item \textbf{Jellemzők}:
+Általában egy beavatkozás előtti és utáni állapotot hasonlítanak össze
+
+\item \textbf{Előnyök}: Egyszerű, gyors
+
+\item \textbf{Hátrányok}: Nem lehet kiszűrni az időbeli trendek hatását, confounding problémája jelentős
+
+\item \textbf{Példa} 
+A könyv nem ad konkrét példát erre a típusra, de megemlíti, hogy ezek általában egy beavatkozás előtti és utáni állapotot hasonlítanak össze.\textbf{Elméleti illusztráció}: Egy új gyógyszer hatásosságának vizsgálata magas vérnyomásban szenvedő betegeknél. A kutatók kiválasztanak egy csoport magas vérnyomású beteget, megmérik a vérnyomásukat, majd elkezdik adni nekik az új gyógyszert. Egy meghatározott idő után (pl. 3 hónap) újra megmérik a vérnyomásukat, és összehasonlítják a kezdeti értékekkel.
+
+\end{itemize}
+
+A könyv hangsúlyozza, hogy a megfigyeléses vizsgálatok fő előnye, hogy valós életbeli körülményeket tükröznek, és olyan helyzetekben is alkalmazhatók, ahol kísérletek etikailag vagy gyakorlatilag nem kivitelezhetők. Ugyanakkor a fő hátrányuk, hogy nehezebb az ok-okozati összefüggések megállapítása, és a confounding problémája jelentősebb.
+
+(Forrás: 4. fejezet, 33-43. oldal)
+
+Saját kiegészítés: Fontos megjegyezni, hogy a modern epidemiológiában egyre kifinomultabb statisztikai módszereket alkalmaznak a megfigyeléses vizsgálatok elemzésére, hogy minimalizálják a confounding és egyéb torzítások hatását. Ilyen módszerek például a propensity score matching vagy az instrumentális változók módszere. Ezek segíthetnek abban, hogy a megfigyeléses vizsgálatok eredményei megbízhatóbbak legyenek, bár természetesen nem helyettesíthetik teljesen a randomizált kísérleteket.
+
+\subsection{Kísérletes vizsgálatok jellemzői}
+
+\subsubsection{Definíció}
+Kísérletes vizsgálatokban a kutatók aktívan befolyásolják az expozíciót, vagyis azt a tényezőt, amelynek a hatását vizsgálni szeretnék.
+
+(Forrás: 3. fejezet, 27. oldal)
+
+\subsubsection{Fő jellemzők}
+
+\paragraph{Beavatkozás az expozícióba:}
+\begin{itemize}
+    \item A kutatók döntik el, ki kerül a kezelt és ki a kontroll csoportba.
+    \item Ez lehetővé teszi az ok-okozati összefüggések közvetlen vizsgálatát.
+\end{itemize}
+
+\paragraph{Randomizáció:}
+\begin{itemize}
+    \item A résztvevőket véletlenszerűen osztják be a csoportokba.
+    \item Ez a leghatékonyabb módszer a confounding kiküszöbölésére.
+    \item Példa: James Burns Amberson 1931-es TBC-kísérlete, ahol pénzfeldobással döntötte el, ki kap kezelést.
+\end{itemize}
+
+(Forrás: 3. fejezet, 26. oldal)
+
+\paragraph{Kontrollcsoport használata:}
+\begin{itemize}
+    \item Lehetővé teszi a kezelés hatásának összehasonlítását a kezelés nélküli állapottal.
+    \item Gyakran placebo-kontrollt alkalmaznak.
+\end{itemize}
+
+\paragraph{Vakosítás:}
+\begin{itemize}
+    \item Egyszeresen vak: a résztvevők nem tudják, melyik csoportba kerültek.
+    \item Kettősen vak: sem a résztvevők, sem a kutatók nem tudják, ki melyik csoportban van.
+    \item Célja a torzítások csökkentése.
+\end{itemize}
+
+\subsubsection{Előnyök és hátrányok}
+
+\paragraph{Előnyök:}
+\begin{itemize}
+    \item Lehetővé teszi az ok-okozati összefüggések közvetlen vizsgálatát.
+    \item A randomizáció révén kiküszöböli a confounding hatását.
+    \item Jól kontrollált körülmények között vizsgálhatók a hatások.
+\end{itemize}
+
+\paragraph{Hátrányok:}
+\begin{itemize}
+    \item Etikai korlátok (pl. nem lehet szándékosan káros expozíciónak kitenni az alanyokat).
+    \item Költséges és időigényes lehet.
+    \item A résztvevők összetétele gyakran eltér a teljes populációétól (szelekciós torzítás).
+    \item Általában kisebb mintamérettel dolgozik, mint a megfigyeléses vizsgálatok.
+    \item Az utánkövetési idő gyakran korlátozott.
+\end{itemize}
+
+(Forrás: 3. fejezet, 27-31. oldal)
+
+\subsubsection{Alkalmazási területek}
+\begin{itemize}
+    \item Gyógyszervizsgálatok
+    \item Új terápiás eljárások tesztelése
+    \item Prevenciós stratégiák hatékonyságának vizsgálata
+\end{itemize}
+
+\subsubsection{Etikai megfontolások}
+\begin{itemize}
+    \item Minden kísérletes vizsgálathoz etikai bizottsági engedély szükséges.
+    \item A résztvevők tájékozott beleegyezése elengedhetetlen.
+    \item A potenciális kockázatokat és előnyöket gondosan mérlegelni kell.
+\end{itemize}
+
+\subsubsection{Példák}
+\begin{itemize}
+    \item James Lind skorbut elleni kísérlete (1747)
+    \item Az ISIS-2 vizsgálat, amely az aszpirin és sztreptokináznak nevezett vérrögoldó hatását vizsgálta infarktusban (1988)
+\end{itemize}
+
+(Forrás: 3. fejezet, 27-31. oldal, 6. fejezet, 88-89. oldal)
+
+
+
+\subsection{Metaanalízisek fogalma, szerepe, fontossága}
+
+\subsubsection{Fogalom}
+A metaanalízis több, azonos kérdést vizsgáló kutatás eredményeinek statisztikai összegzése. Ez egy szisztematikus módszer, amely lehetővé teszi, hogy különböző vizsgálatok eredményeit együttesen értékeljük és vonjunk le következtetéseket.
+
+(Forrás: 3. fejezet, 29. oldal)
+
+\subsubsection{Szerepe}
+
+\paragraph{Bizonyítékok szintézise:}
+A metaanalízis lehetővé teszi, hogy egy adott kutatási kérdésről átfogóbb képet kapjunk, mint amit egyetlen vizsgálat eredményei alapján kaphatnánk.
+
+\paragraph{Statisztikai erő növelése:}
+Az egyes vizsgálatok eredményeinek összevonásával növelhető a statisztikai erő, ami különösen fontos lehet ritka események vagy kis hatások kimutatásánál.
+
+\paragraph{Ellentmondások feloldása:}
+Ha különböző vizsgálatok ellentmondó eredményeket mutatnak, a metaanalízis segíthet tisztázni az összképet.
+
+\paragraph{Új hipotézisek generálása:}
+Az összesített adatok elemzése során új összefüggések, hipotézisek merülhetnek fel.
+
+\subsubsection{Fontossága}
+
+\paragraph{Magasabb szintű bizonyíték:}
+A metaanalízisek az evidencia-alapú orvoslás hierarchiájában magasabb szinten állnak, mint az egyedi vizsgálatok. Ez azt jelenti, hogy erősebb bizonyítékot szolgáltatnak egy adott kérdésben.
+
+\paragraph{Klinikai döntéshozatal támogatása:}
+Az összesített eredmények segíthetnek az orvosoknak a legjobb kezelési módok kiválasztásában.
+
+\paragraph{Kutatási irányok meghatározása:}
+A metaanalízisek rámutathatnak olyan területekre, ahol további kutatásokra van szükség.
+
+\paragraph{Erőforrások hatékony felhasználása:}
+Ahelyett, hogy újabb és újabb hasonló vizsgálatokat végeznének, a kutatók a meglévő eredményeket szintetizálhatják, ami idő- és költséghatékony.
+
+\subsubsection{Korlátok és kihívások}
+A könyv megemlíti, hogy bár a metaanalízisek rendkívül hasznosak, vannak korlátaik is:
+
+\paragraph{Publikációs torzítás:}
+A negatív eredményű vizsgálatokat ritkábban publikálják, ami torzíthatja a metaanalízis eredményeit.
+
+\paragraph{Heterogenitás:}
+Az összevont vizsgálatok között lehetnek módszertani vagy populációs különbségek, amelyek megnehezítik az összehasonlítást.
+
+\paragraph{Minőségi kérdések:}
+A metaanalízis eredménye csak olyan jó lehet, mint az alapjául szolgáló vizsgálatok minősége.
+
+(Forrás: 3. fejezet, 29-30. oldal)
+
+    
+
+    
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
