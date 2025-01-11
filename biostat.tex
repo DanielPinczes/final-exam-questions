@@ -10,6 +10,12 @@
 \usepackage{hyperref} % Hyperlinks
 \usepackage{fancyhdr} % Header and footer customization
 \usepackage{graphicx} % Include graphics
+\usepackage{multirow}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepgfplotslibrary{statistics}
+
+
 
 % Page settings
 \geometry{margin=1in}
@@ -547,6 +553,624 @@
 
     (Forrás: 3. fejezet, 29-30. oldal)
 
+    \newpage
+
+\section{Deskriptív statisztika: kategoriális változó(k) vizsgálata}
+
+\paragraph{Tétel:} Analitikus módszerek kategoriális változó vizsgálatára: gyakorisági sor, gyakoriság, relatív
+gyakoriság, módusz. Grafikus módszer kategoriális változó vizsgálatára: oszlop- és
+kördiagram. Két kategoriális változó egyidejű vizsgálata, kereszttábla.
+
+\subsection{Analitikus módszerek kategoriális változó vizsgálatára}
+
+\subsubsection{Gyakorisági sor}
+A gyakorisági sor a kategoriális változó lehetséges kimeneteit (kategóriáit) tartalmazza, együtt azzal, hogy az adott kimenet hányszor fordult elő az adatbázisban.
+(Forrás: 19. oldal)
+
+\begin{description}
+\item[Példa:] Tekintsük egy kórház betegfelvételi osztályán egy nap alatt felvett betegek nemét:
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+Nem & Gyakoriság \\
+\hline
+Férfi & 45 \\
+Nő & 55 \\
+\hline
+\end{tabular}
+\end{center}
+Ez a táblázat a nem változó gyakorisági sora.
+\end{description}
+
+\subsubsection{Gyakoriság}
+A gyakoriság az adott kategória előfordulásainak száma az adatbázisban. A statisztikában általában $f$-fel jelölik. Ha az $i$-edik kategória gyakoriságáról van szó, akkor $f_i$-vel jelölik.
+(Forrás: 19. oldal)
+
+\begin{description}
+\item[Példa:] A fenti példában $f_{\text{férfi}} = 45$ és $f_{\text{nő}} = 55$.
+\end{description}
+
+\subsubsection{Relatív gyakoriság}
+A relatív gyakoriság az abszolút gyakoriság osztva a mintanagysággal ($n$-nel). Azt mutatja meg, hogy egy kategóriába a megfigyelési egységek mekkora hányada esik. A relatív gyakoriságok összege mindig 1.
+(Forrás: 19-20. oldal)
+
+\begin{description}
+\item[Példa:] A fenti példában a relatív gyakoriságok:
+\begin{align*}
+\text{Férfi: } & \frac{45}{100} = 0,45 \text{ vagy } 45\% \\
+\text{Nő: } & \frac{55}{100} = 0,55 \text{ vagy } 55\%
+\end{align*}
+\end{description}
+
+\subsubsection{Módusz}
+A módusz a leggyakoribb kimenet, azaz az a kategória, amelyhez tartozó gyakoriság a legnagyobb az adatbázisban. Jelölése: Mo.
+(Forrás: 20. oldal)
+
+\begin{description}
+\item[Példa:] A fenti példában a módusz a "Nő" kategória, mivel ennek a legnagyobb a gyakorisága (55).
+\end{description}
+
+\subsubsection{Kiegészítések}
+
+\paragraph{Kumulált gyakoriság és kumulált relatív gyakoriság}
+Bár a könyv itt nem említi, de ordinális kategoriális változók esetén értelmezhető a kumulált gyakoriság ($f'$) és a kumulált relatív gyakoriság ($g'$) fogalma is. Ezek adott kategóriáig összegzik a gyakoriságokat, illetve relatív gyakoriságokat.
+
+\begin{description}
+\item[Példa:] Tekintsük egy fájdalomcsillapító hatékonyságának értékelését:
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Értékelés & Gyakoriság & Kumulált gyakoriság & Kumulált relatív gyakoriság \\
+\hline
+Nem hatásos & 10 & 10 & 0,1 \\
+Kissé hatásos & 30 & 40 & 0,4 \\
+Közepesen hatásos & 40 & 80 & 0,8 \\
+Nagyon hatásos & 20 & 100 & 1,0 \\
+\hline
+\end{tabular}
+\end{center}
+\end{description}
+
+\paragraph{Mintanagyság}
+A mintanagyságot általában $n$-nel jelölik, és ez a gyakoriságok összege: $\sum_{i=1}^n f_i = n$.
+(Forrás: 19. oldal)
+
+\begin{description}
+\item[Példa:] A betegfelvételi példában $n = 45 + 55 = 100$.
+\end{description}
+
+\paragraph{Megoszlás}
+A teljes relatív gyakorisági sort a statisztikusok gyakran a változó megoszlásának hívják.
+(Forrás: 20. oldal)
+
+\begin{description}
+\item[Példa:] A betegfelvételi példában a nem változó megoszlása: 45\% férfi, 55\% nő.
+\end{description}
+
+\paragraph{Információtömörítés}
+A könyv kiemeli, hogy kategoriális változók esetében a gyakorisági sor nem jár információveszteséggel, ami speciális eset a statisztikában.
+(Forrás: 20. oldal)
+
+\paragraph{Ordinális vs. nominális változók}
+A könyv megjegyzi, hogy az ordinalitás csak annyit módosít a fentieken, hogy a gyakorisági sorban a kategóriák felsorolási sorrendje kötött lesz.
+(Forrás: 20. oldal)
+
+\paragraph{Medián ordinális változóknál}
+Bár a könyv itt nem részletezi, de megemlíti, hogy ordinális esetben elvileg definiálható lenne a medián fogalma is, de használata nem tipikus.
+(Forrás: 20. oldal)
+
+\begin{description}
+\item[Példa:] A fájdalomcsillapító példában a medián a "Közepesen hatásos" kategória lenne, mert ez az a kategória, amely felett és alatt is a megfigyelések fele található.
+\end{description}
+
+\subsection{Grafikus módszer kategoriális változó vizsgálatára}
+
+A kategoriális változók grafikus elemzése lényegében a gyakorisági sor vizualizálását jelenti. Ennek két, gyakorlatban legtipikusabb eszköze az oszlopdiagram és a kördiagram.
+(Forrás: 21. oldal)
+
+\subsubsection{Oszlopdiagram}
+
+Az oszlopdiagram a kategóriák gyakoriságát vagy relatív gyakoriságát oszlopok magasságával szemlélteti.
+(Forrás: 21. oldal)
+
+\begin{description}
+\item[Példa:] Tekintsük egy kórház sürgősségi osztályán egy nap alatt ellátott betegek triage kategóriáit:
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+Triage kategória & Betegek száma \\
+\hline
+Azonnali ellátás & 5 \\
+Nagyon sürgős & 15 \\
+Sürgős & 30 \\
+Kevésbé sürgős & 40 \\
+Nem sürgős & 10 \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\setlength{\unitlength}{0.5cm}
+\begin{picture}(20,10)
+\put(0,0){\line(1,0){20}}
+\put(0,0){\line(0,1){10}}
+\put(2,0){\line(0,1){1}}
+\put(6,0){\line(0,1){3}}
+\put(10,0){\line(0,1){6}}
+\put(14,0){\line(0,1){8}}
+\put(18,0){\line(0,1){2}}
+\put(1,-1){A}
+\put(5,-1){NS}
+\put(9,-1){S}
+\put(13,-1){KS}
+\put(17,-1){NS}
+\put(-1,5){20}
+\put(-1,10){40}
+\end{picture}
+\end{center}
+
+\small{A: Azonnali, NS: Nagyon sürgős, S: Sürgős, KS: Kevésbé sürgős, NS: Nem sürgős}
+
+\end{description}
+
+Az oszlopdiagram előnye, hogy könnyen értelmezhető és összehasonlítható a kategóriák gyakorisága. Mind abszolút, mind relatív gyakoriságok ábrázolhatók vele.
+(Forrás: 21. oldal)
+
+\subsubsection{Kördiagram}
+
+A kördiagram a kategóriák relatív gyakoriságát körcikkek területével szemlélteti.
+(Forrás: 21. oldal)
+
+\begin{description}
+\item[Példa:] Az előző példa adatait kördiagramon ábrázolva:
+
+\begin{center}
+\setlength{\unitlength}{0.5cm}
+\begin{picture}(10,10)
+\put(5,5){\circle{10}}
+\put(5,5){\line(1,0){5}}
+\put(5,5){\line(3,4){3}}
+\put(5,5){\line(-1,0){5}}
+\put(5,5){\line(0,-1){5}}
+\put(5,5){\line(4,-3){4}}
+\put(7,8){5\%}
+\put(9,5){15\%}
+\put(7,2){30\%}
+\put(2,2){40\%}
+\put(2,7){10\%}
+\end{picture}
+\end{center}
+
+\end{description}
+
+A kördiagram előnye, hogy jól szemlélteti az egyes kategóriák arányát az egészhez képest. Hátránya, hogy csak relatív gyakoriságok ábrázolására alkalmas.
+(Forrás: 21. oldal)
+
+\subsubsection{Összehasonlítás és ajánlások}
+
+A könyv megjegyzi, hogy tudományos munkákban általában az oszlopdiagram a preferált. Ennek oka, hogy pszichológiai vizsgálatok szerint az emberi szem jobban tud lineáris mértékeket kezelni és értelmezni, mint területet.
+(Forrás: 21. oldal)
+
+Az egyetlen megfontolás, ami mégis az oszlopdiagram ellen szólhat néha, hogy az oszlopok kirajzolási sorrendje már implikál egyfajta sorrendezést (a természetes balról-jobbra olvasás miatt), ami adott esetben nem következik az változó tartalmából.
+(Forrás: 21. oldal)
+
+\subsubsection{Ordinális változók esetén}
+
+Az ordinalitás e téren nem sok változást okoz: az oszlopok sorrendje kötött lesz, illetve ábrázolhatóvá válik a kumulált gyakoriság is (természetesen csak oszlopdiagrammal).
+(Forrás: 21. oldal)
+
+\begin{description}
+\item[Példa:] Az előző példában a triage kategóriák ordinális változót alkotnak. Ebben az esetben az oszlopdiagramon a kategóriák sorrendje kötött lenne (a sürgősség csökkenő sorrendjében), és ábrázolható lenne a kumulált gyakoriság is.
+\end{description}
+
+\subsection{Két kategoriális változó egyidejű vizsgálata, kereszttábla}
+
+Két kategoriális változó kapcsolatának vizsgálatára a legfontosabb eszköz a kereszttábla (más néven kontingenciatábla vagy kombinációs tábla).
+(Forrás: 33-34. oldal)
+
+\subsubsection{Kereszttábla definíciója}
+
+A kereszttábla egy olyan táblázat, melynek soraiban és oszlopaiban a két változó lehetséges kimenetelei vannak, az egyes cellákban pedig azon megfigyelési egységek darabszáma (tehát gyakorisága), melyek a cella sora és oszlopa szerinti kimenetűek a sorhoz illetve az oszlophoz rendelt változó szerint.
+(Forrás: 33. oldal)
+
+\begin{description}
+\item[Példa:] Tekintsük egy kórházban felvett betegek nemét és dohányzási szokásait:
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{} & \multicolumn{2}{c|}{Dohányzás} \\
+\cline{3-4}
+\multicolumn{2}{|c|}{} & Igen & Nem \\
+\hline
+\multirow{2}{*}{Nem} & Férfi & 30 & 20 \\
+\cline{2-4}
+ & Nő & 15 & 35 \\
+\hline
+\end{tabular}
+\end{center}
+
+\end{description}
+
+\subsubsection{Kereszttábla elemzése}
+
+A kereszttáblából különböző típusú gyakoriságokat és relatív gyakoriságokat számolhatunk:
+
+\paragraph{Abszolút gyakoriságok:} Ezek a táblázat celláiban szereplő számok.
+
+\paragraph{Relatív gyakoriságok:} Az abszolút gyakoriságokat elosztjuk a teljes mintanagysággal.
+
+\paragraph{Feltételes relatív gyakoriságok:} Az abszolút gyakoriságokat elosztjuk a megfelelő sor- vagy oszlopösszeggel.
+
+\begin{description}
+\item[Példa:] A fenti táblázatban:
+\begin{itemize}
+    \item Abszolút gyakoriság: pl. 30 (dohányzó férfiak száma)
+    \item Relatív gyakoriság: pl. 30/100 = 0,3 (dohányzó férfiak aránya a teljes mintában)
+    \item Feltételes relatív gyakoriság: pl. 30/50 = 0,6 (dohányzók aránya a férfiak között)
+\end{itemize}
+\end{description}
+
+\subsubsection{Kapcsolat vizsgálata}
+
+A kereszttábla segítségével vizsgálhatjuk a két változó közötti kapcsolatot. Két változó között akkor van kapcsolat, ha a sorváltozó feltételes megoszlásai különböznek az oszlopváltozó különböző értékei esetén (vagy fordítva).
+(Forrás: 35-36. oldal)
+
+\begin{description}
+\item[Példa:] A fenti táblázatban kapcsolat látszik a nem és a dohányzási szokások között, mert:
+\begin{itemize}
+    \item A férfiak között a dohányzók aránya: 30/50 = 60\%
+    \item A nők között a dohányzók aránya: 15/50 = 30\%
+\end{itemize}
+Ez arra utal, hogy a nemnek és a dohányzási szokásoknak van kapcsolata ebben a mintában.
+\end{description}
+
+\subsubsection{Mutatószámok}
+
+A kapcsolat erősségének mérésére különböző mutatószámokat használhatunk, például:
+
+\begin{itemize}
+    \item Phi-együttható (2x2-es táblák esetén)
+    \item Cramer's V (általános esetben)
+    \item Kontingencia-együttható
+\end{itemize}
+
+Ezek a mutatók 0 és 1 között mozognak, ahol 0 jelenti a kapcsolat hiányát, 1 pedig a tökéletes kapcsolatot.
+(Forrás: 37. oldal)
+
+\subsubsection{Grafikus ábrázolás}
+
+Két kategoriális változó kapcsolatát vizuálisan is megjeleníthetjük, például mozaikábrával vagy asszociációs ábrával, bár ezek nem olyan gyakoriak, mint az egyváltozós elemzéseknél használt oszlop- vagy kördiagramok.
+(Forrás: 37-38. oldal)
+
+\newpage
+
+\section{Deskriptív statisztika: folytonos változó(k) vizsgálata}
+
+\paragraph{Tétel:} Analitikus módszerek folytonos változó vizsgálatára: átlag, medián, terjedelem, szórás, IQR,
+kvantilisek. Grafikus módszer folytonos változó vizsgálatára: hisztogram, magfüggvényes
+sűrűségbecslés, Tukey-féle boxplot. Két folytonos változó együttes vizsgálata: kovariancia,
+korreláció, szóródási diagram.
+
+\subsection{Analitikus módszerek folytonos változó vizsgálatára}
+
+A folytonos változók vizsgálatára számos analitikus módszer áll rendelkezésünkre. Ezek közül a legfontosabbak az alábbiak:
+
+\subsubsection{Átlag}
+
+Az átlag a centrális tendencia legismertebb mutatója. Definíció szerint:
+
+\begin{equation}
+\bar{x} = \frac{\sum_{i=1}^n x_i}{n}
+\end{equation}
+
+ahol $x_i$ az egyes megfigyelések, $n$ pedig a mintaelemszám.
+(Forrás: 24. oldal)
+
+\begin{description}
+\item[Előnyök:] Közismert, könnyen értelmezhető.
+\item[Hátrányok:] Nem robusztus, érzékeny a kiugró értékekre.
+\end{description}
+
+\subsubsection{Nyesett (trimmelt) átlag}
+
+A nyesett átlag egy robusztusabb alternatívája a hagyományos átlagnak. Kiszámításához elhagyjuk a legkisebb és legnagyobb adott számú elemet, és csak a maradékot átlagoljuk.
+
+\begin{equation}
+\bar{x}_{\text{trim}} = \frac{\sum_{i=k+1}^{n-k} x_{(i)}}{n-2k}
+\end{equation}
+
+ahol $x_{(i)}$ a rendezett minta $i$-edik eleme, és $k$ az elhagyott elemek száma mindkét végén.
+
+\begin{description}
+\item[Előnyök:]
+\begin{itemize}
+    \item Robusztusabb, mint a hagyományos átlag
+    \item Kevésbé érzékeny a kiugró értékekre
+\end{itemize}
+\item[Hátrányok:]
+\begin{itemize}
+    \item Nem használja fel az összes adatot
+    \item A nyesés mértékének megválasztása szubjektív lehet
+\end{itemize}
+\end{description}
+
+Tipikusan az 5\%-os trimmelt átlagot használják, ami azt jelenti, hogy a minta legkisebb és legnagyobb 5-5\%-át hagyják el.
+
+(Forrás: 25. oldal)
+
+\subsubsection{Medián}
+
+A medián a nagyság szerint sorbarendezett megfigyelések közül a középső.
+
+\begin{description}
+\item[Előnyök:] Robusztus, nem érzékeny a kiugró értékekre.
+\item[Hátrányok:] Kevésbé ismert, mint az átlag.
+\end{description}
+
+(Forrás: 25. oldal)
+
+\subsubsection{Terjedelem}
+
+A terjedelem a legnagyobb és a legkisebb mintaelem különbsége:
+
+\begin{equation}
+R = \max(x_i) - \min(x_i)
+\end{equation}
+
+\begin{description}
+\item[Előnyök:] Egyszerű, könnyen értelmezhető.
+\item[Hátrányok:] Nagyon érzékeny a kiugró értékekre.
+\end{description}
+
+(Forrás: 27. oldal)
+
+\subsubsection{Szórás}
+
+A szórás a megfigyelések átlagtól való átlagos eltérését méri:
+
+\begin{equation}
+s_x = \sqrt{\frac{\sum_{i=1}^n (x_i - \bar{x})^2}{n-1}}
+\end{equation}
+
+\begin{description}
+\item[Előnyök:] Széles körben használt, jól interpretálható.
+\item[Hátrányok:] Nem robusztus, érzékeny a kiugró értékekre.
+\end{description}
+
+(Forrás: 27. oldal)
+
+\subsubsection{Interkvartilis terjedelem (IQR)}
+
+Az IQR a harmadik és az első kvartilis különbsége:
+
+\begin{equation}
+IQR = Q_3 - Q_1
+\end{equation}
+
+\begin{description}
+\item[Előnyök:] Robusztus, nem érzékeny a kiugró értékekre.
+\item[Hátrányok:] Kevésbé ismert, mint a szórás.
+\end{description}
+
+(Forrás: 27-28. oldal)
+
+\subsubsection{Kvantilisek}
+
+A $p$-kvantilis az az érték, aminél a megfigyelések $p$-ed része kisebb, $(1-p)$-ed része nagyobb.
+
+\begin{description}
+\item[Speciális kvantilisek:]
+\begin{itemize}
+    \item Kvartilisek: $Q_1$ (25\%), $Q_2$ (50%, medián), $Q_3$ (75%)
+    \item Decilisek: $D_1, D_2, ..., D_9$
+    \item Percentilisek: $P_1, P_2, ..., P_{99}$
+\end{itemize}
+\end{description}
+
+(Forrás: 26. oldal)
+
+\subsection{Grafikus módszerek folytonos változó vizsgálatára}
+
+\subsubsection{Hisztogram}
+
+\begin{description}
+\item[Példa:] Tekintsük 100 felnőtt személy vérnyomásának szisztolés értékét (Hgmm-ben).
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    ybar,
+    ylabel={Gyakoriság},
+    xlabel={Szisztolés vérnyomás (Hgmm)},
+    xtick={100,120,140,160,180},
+    ytick={0,10,20,30,40},
+    ymajorgrids=true,
+    bar width=15pt,
+]
+\addplot coordinates {
+    (100,5) (120,35) (140,40) (160,15) (180,5)
+};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+Ez a hisztogram mutatja, hogy a legtöbb érték 120-140 Hgmm között van, és az eloszlás közel szimmetrikus.
+\end{description}
+
+\subsubsection{Magfüggvényes sűrűségbecslés}
+
+\begin{description}
+\item[Példa:] Ugyanazon vérnyomásadatok magfüggvényes sűrűségbecslése:
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    ylabel={Sűrűség},
+    xlabel={Szisztolés vérnyomás (Hgmm)},
+    xtick={100,120,140,160,180},
+    ymajorgrids=true,
+]
+\addplot[smooth, thick, domain=80:200] {0.02*exp(-0.5*((x-130)/20)^2)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+Ez a becslés simább képet ad az eloszlásról, mint a hisztogram, és jól mutatja az eloszlás csúcsát 130 Hgmm körül.
+\end{description}
+
+\subsubsection{Tukey-féle boxplot}
+
+A könyv a Low Infant Birth Weight (LOWBWT) adatbázis születési tömeg (bwt) változóját használja példaként a boxplot bemutatására.
+
+\begin{description}
+\item[Példa:] A LOWBWT adatbázis születési tömeg változójának boxplot ábrázolása:
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    y=0.004cm,
+    boxplot/draw direction=y,
+    ylabel={Születési tömeg [g]},
+    ytick={1000,2000,3000,4000,5000},
+    height=8cm,
+    width=6cm
+]
+\addplot+[
+    boxplot prepared={
+      lower whisker=709,
+      lower quartile=2414,
+      median=2977,
+      upper quartile=3487,
+      upper whisker=4990
+    },
+] coordinates {};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+A boxplot értelmezése:
+\begin{itemize}
+    \item A doboz alja az első kvartilis (Q1 = 2414 g)
+    \item A dobozban lévő vonal a medián (2977 g)
+    \item A doboz teteje a harmadik kvartilis (Q3 = 3487 g)
+    \item Az alsó "bajusz" vége a legkisebb nem kiugró érték (709 g)
+    \item A felső "bajusz" vége a legnagyobb nem kiugró érték (4990 g)
+\end{itemize}
+
+Fontos megjegyzések:
+\begin{itemize}
+    \item Az interkvartilis terjedelem (IQR) = Q3 - Q1 = 3487 - 2414 = 1073 g
+    \item A boxplot nem mutat kiugró értékeket ebben a példában
+    \item Az eloszlás enyhén jobbra ferde, mivel a medián közelebb van Q1-hez, mint Q3-hoz
+\end{itemize}
+\end{description}
+
+(Forrás: 32-33. oldal, 3.5. ábra)
+
+\subsection{Két folytonos változó együttes vizsgálata}
+
+Két folytonos változó kapcsolatának vizsgálatára több módszer is rendelkezésünkre áll. Ezek közül a legfontosabbak a kovariancia, a korreláció és a szóródási diagram.
+
+\subsubsection{Kovariancia}
+
+A kovariancia két változó együttes változékonyságát méri.
+
+\begin{equation}
+\text{cov}(x,y) = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{n}
+\end{equation}
+
+\begin{description}
+\item[Értelmezés:]
+\begin{itemize}
+    \item Pozitív kovariancia: a változók együtt mozognak
+    \item Negatív kovariancia: a változók ellentétesen mozognak
+    \item Nulla körüli kovariancia: nincs lineáris kapcsolat
+\end{itemize}
+\item[Hátrány:] Skálafüggő, nehezen összehasonlítható különböző változópárok között
+\end{description}
+
+(Forrás: 38-39. oldal)
+
+\subsubsection{Korreláció}
+
+A korreláció a kovariancia standardizált formája, amely -1 és +1 között mozog.
+
+\begin{equation}
+r = \frac{\text{cov}(x,y)}{s_x s_y}
+\end{equation}
+
+ahol $s_x$ és $s_y$ az $x$ és $y$ változók szórása.
+
+\begin{description}
+\item[Értelmezés:]
+\begin{itemize}
+    \item $r = 1$: tökéletes pozitív lineáris kapcsolat
+    \item $r = -1$: tökéletes negatív lineáris kapcsolat
+    \item $r = 0$: nincs lineáris kapcsolat
+\end{itemize}
+\item[Előnyök:]
+\begin{itemize}
+    \item Skálafüggetlen, összehasonlítható különböző változópárok között
+    \item Könnyen értelmezhető
+\end{itemize}
+\item[Hátrányok:]
+\begin{itemize}
+    \item Csak lineáris kapcsolatot mér
+    \item Érzékeny a kiugró értékekre
+\end{itemize}
+\end{description}
+
+(Forrás: 39-40. oldal)
+
+\subsubsection{Szóródási diagram}
+
+A szóródási diagram két folytonos változó kapcsolatának grafikus ábrázolása.
+
+\begin{description}
+\item[Készítés:] Minden megfigyelési egységhez egy pontot rajzolunk egy derékszögű koordináta-rendszerben, ahol az x-koordináta az egyik, az y-koordináta a másik változó értéke.
+
+\item[Példa:] Tekintsük az anyai testtömeg (lwt) és az újszülött születési tömege (bwt) közötti kapcsolatot a LOWBWT adatbázisban:
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    xlabel={Anya testtömege (UM) [font]},
+    ylabel={Születési tömeg [g]},
+    xmin=80, xmax=250,
+    ymin=500, ymax=5000,
+    scatter/use mapped color={draw=black, fill=black},
+]
+\addplot[only marks, scatter] table[x=lwt, y=bwt] {
+lwt bwt
+100 2557
+130 2594
+115 2600
+120 2622
+110 2637
+95  2637
+};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\item[Értelmezés:] 
+\begin{itemize}
+    \item A pontok elhelyezkedése mutatja a kapcsolat jellegét és erősségét
+    \item Lineáris trend esetén a pontok egy egyenes mentén csoportosulnak
+    \item A szórás mértéke az egyenes körül mutatja a kapcsolat erősségét
+\end{itemize}
+
+\item[Előnyök:]
+\begin{itemize}
+    \item Vizuálisan jól értelmezhető
+    \item Nemlineáris kapcsolatokat is kimutat
+    \item Kiugró értékek könnyen azonosíthatók
+\end{itemize}
+\end{description}
+
+(Forrás: 40-41. oldal)
 
 \end{document}
 
