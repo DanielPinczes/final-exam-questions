@@ -1,0 +1,2584 @@
+\documentclass[a4paper,12pt]{article}
+
+% Packages
+\usepackage[utf8]{inputenc} % For UTF-8 encoding
+\usepackage[hungarian]{babel} % Hungarian language support
+\usepackage{amsmath, amssymb} % Math symbols and environments
+\usepackage{geometry} % Page geometry
+\usepackage{titlesec} % Section formatting
+\usepackage{enumitem} % Custom lists
+\usepackage{hyperref} % Hyperlinks
+\usepackage{fancyhdr} % Header and footer customization
+\usepackage{graphicx} % Include graphics
+\usepackage{multirow}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepgfplotslibrary{statistics}
+\usepackage{amsmath} % matematikai jelölésekhez
+\usepackage{amssymb} % további matematikai szimbólumokhoz
+\usepackage{enumitem} % felsorolásokhoz (opcionális)
+
+
+% Page settings
+\geometry{margin=1in}
+
+% Title and author
+\title{\textbf{Felhőszámítási rendszerek Záróvizsga Tételek}}
+\author{Név: \textit{[Pinczés Dániel]}}
+\date{\today}
+
+% Header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Felhőszámítási rendszerek}
+\rhead{\thepage}
+
+% Section formatting
+\titleformat{\section}[block]{\bfseries\Large}{Tétel \thesection}{1em}{}
+\titleformat{\subsection}[block]{\bfseries\large}{\thesubsection}{1em}{}
+
+
+\begin{document}
+
+% Title Page
+    \maketitle
+    \thispagestyle{empty}
+    \newpage
+
+% Table of Contents
+    \tableofcontents
+    \newpage
+
+
+    \section{Felhőszámítási rendszerek alapjai}
+
+    \paragraph{Tétel:} Felhőszámítási rendszerek alapjai: definíciók, szolgáltatási és kialakítási modellek, felhasználási mintázatok
+
+    \subsection{Felhőszámítás definíciói}
+
+    A felhőszámítás definícióját és jellemzőit elsősorban a csatolt "cloud.pdf" diasor alapján dolgoztam ki. Konkrétan:
+
+    \begin{itemize}
+        \item A NIST definíció a 14. diáról származik.
+        \item Az öt alapvető jellemző a 15. és 16. diáról származik.
+    \end{itemize}
+
+    A felhőszámítás egy olyan számítástechnikai modell, amely lehetővé teszi a hálózaton keresztül történő, igény szerinti hozzáférést megosztott, konfigurálható számítási erőforrásokhoz (pl. hálózatok, szerverek, tárolók, alkalmazások és szolgáltatások). Ezek az erőforrások gyorsan üzembe helyezhetők és felszabadíthatók minimális menedzsment erőfeszítéssel vagy szolgáltatói beavatkozással.\footnote{Forrás: cloud.pdf, 14. dia}
+
+    Az Egyesült Államok Nemzeti Szabványügyi és Technológiai Intézete (NIST) szerint a felhőszámítás definíciója a következő:
+
+    \begin{quote}
+        ``A felhőszámítás egy modell, amely lehetővé teszi a mindenütt jelen lévő, kényelmes, igény szerinti hálózati hozzáférést egy megosztott, konfigurálható számítási erőforrás-készlethez (pl. hálózatok, szerverek, tárolók, alkalmazások és szolgáltatások), amelyek gyorsan rendelkezésre bocsáthatók és felszabadíthatók minimális menedzsment erőfeszítéssel vagy szolgáltatói interakcióval.''\footnote{Forrás: cloud.pdf, 14. dia}
+    \end{quote}
+
+    A felhőszámítás öt alapvető jellemzője:\footnote{Forrás: cloud.pdf, 15-16. dia}
+
+    \begin{enumerate}
+        \item \textbf{Igény szerinti önkiszolgálás:} A felhasználók automatikusan, szolgáltatói beavatkozás nélkül tudják igénybe venni a számítási kapacitásokat.
+
+        \item \textbf{Széles körű hálózati hozzáférés:} Az erőforrások hálózaton keresztül érhetők el, és szabványos mechanizmusok segítségével használhatók különböző kliensplatformokon.
+
+        \item \textbf{Erőforrás-készletek:} A szolgáltató számítási erőforrásai készletekbe vannak szervezve, hogy több fogyasztót szolgáljanak ki egy több-bérlős modell szerint.
+
+        \item \textbf{Gyors rugalmasság:} A kapacitások gyorsan és rugalmasan biztosíthatók, gyakran automatikusan, hogy gyorsan tudjanak méretezni kifelé és befelé.
+
+        \item \textbf{Mért szolgáltatás:} A felhőrendszerek automatikusan ellenőrzik és optimalizálják az erőforrás-felhasználást mérési képességek segítségével.
+    \end{enumerate}
+
+    Ezek a jellemzők együttesen határozzák meg a felhőszámítás lényegét, és különböztetik meg a hagyományos számítástechnikai modellektől.
+
+    \subsection{Szolgáltatási modellek}
+
+    A felhőszámítás három fő szolgáltatási modellt különböztet meg\footnote{Forrás: cloud.pdf, 17. dia}. Ezek a modellek határozzák meg, hogy a felhasználók milyen típusú és szintű szolgáltatásokat vehetnek igénybe a felhőben.
+
+    \subsubsection{Infrastructure as a Service (IaaS)}
+
+    Az IaaS a legalacsonyabb szintű és legalapvetőbb felhőszolgáltatási modell.
+
+    \begin{itemize}
+        \item \textbf{Definíció:} Az IaaS modellben a szolgáltató virtuális számítási erőforrásokat biztosít a felhasználóknak, beleértve a szervereket, hálózatot, tárolást és egyéb alapvető számítási erőforrásokat.
+
+        \item \textbf{Jellemzők:}
+        \begin{itemize}
+            \item A felhasználó tetszőleges szoftvert telepíthet és futtathat, beleértve az operációs rendszereket és alkalmazásokat.
+            \item A felhasználó nem kezeli vagy irányítja az alapvető felhő-infrastruktúrát.
+            \item A felhasználó irányítja az operációs rendszereket, a tárolást, a telepített alkalmazásokat, és esetleg korlátozott ellenőrzése van egyes hálózati komponensek felett (pl. host tűzfalak).
+        \end{itemize}
+
+        \item \textbf{Példák:} Amazon EC2, Microsoft Azure Virtual Machines, Google Compute Engine.
+    \end{itemize}
+
+    \subsubsection{Platform as a Service (PaaS)}
+
+    A PaaS egy magasabb szintű szolgáltatási modell, amely fejlesztési és futtatási környezetet biztosít.
+
+    \begin{itemize}
+        \item \textbf{Definíció:} A PaaS modellben a szolgáltató egy platformot biztosít, amelyen a felhasználók saját alkalmazásaikat fejleszthetik, tesztelhetik és futtathatják.
+
+        \item \textbf{Jellemzők:}
+        \begin{itemize}
+            \item A felhasználó a szolgáltató által támogatott programozási nyelvekkel, könyvtárakkal, szolgáltatásokkal és eszközökkel létrehozott vagy megszerzett alkalmazásokat telepíthet a felhő-infrastruktúrára.
+            \item A felhasználó nem kezeli vagy irányítja az alapvető felhő-infrastruktúrát, beleértve a hálózatot, szervereket, operációs rendszereket vagy tárolást.
+            \item A felhasználó irányítja a telepített alkalmazásokat és esetleg az alkalmazás-hosztolási környezet konfigurációs beállításait.
+        \end{itemize}
+
+        \item \textbf{Példák:} Google App Engine, Heroku, Microsoft Azure App Service.
+    \end{itemize}
+
+    \subsubsection{Software as a Service (SaaS)}
+
+    A SaaS a legmagasabb szintű és legteljesebb felhőszolgáltatási modell.
+
+    \begin{itemize}
+        \item \textbf{Definíció:} A SaaS modellben a szolgáltató teljes alkalmazásokat biztosít a felhasználóknak, amelyek a felhőben futnak és általában webböngészőn keresztül érhetők el.
+
+        \item \textbf{Jellemzők:}
+        \begin{itemize}
+            \item A felhasználó a szolgáltató alkalmazásait használja, amelyek egy felhő-infrastruktúrán futnak.
+            \item Az alkalmazások különféle kliens eszközökről elérhetők, például egy vékony kliens felületen keresztül, mint egy webböngésző, vagy egy programfelületen keresztül.
+            \item A felhasználó nem kezeli vagy irányítja az alapvető felhő-infrastruktúrát, beleértve a hálózatot, szervereket, operációs rendszereket, tárolást, vagy akár az egyedi alkalmazás-képességeket.
+        \end{itemize}
+
+        \item \textbf{Példák:} Google Workspace (korábban G Suite), Microsoft Office 365, Salesforce.
+    \end{itemize}
+
+    Ezek a szolgáltatási modellek hierarchikus felépítésűek, ahol az IaaS a legalapvetőbb, a PaaS erre épül, míg a SaaS a legmagasabb szintű szolgáltatást nyújtja. A választás attól függ, hogy a felhasználó milyen mértékű kontrollt szeretne gyakorolni az infrastruktúra és az alkalmazások felett, illetve milyen szintű menedzsmentet szeretne átadni a szolgáltatónak.
+
+    \subsection{Kialakítási modellek}
+
+    A felhőszámítási rendszerek négy fő kialakítási modellt különböztetnek meg\footnote{Forrás: cloud.pdf, 20-21. dia}. Ezek a modellek azt határozzák meg, hogy ki férhet hozzá a felhő erőforrásaihoz és hogyan van megszervezve a felhő infrastruktúrája.
+
+    \subsubsection{Privát felhő}
+
+    \begin{itemize}
+        \item \textbf{Definíció:} A felhő infrastruktúrát kizárólag egy szervezet használja, amely több fogyasztót (pl. üzleti egységeket) foglal magában.
+
+        \item \textbf{Jellemzők:}
+        \begin{itemize}
+            \item Lehet a szervezet tulajdonában, kezelésében és üzemeltetésében, vagy egy harmadik fél tulajdonában és kezelésében, vagy ezek valamely kombinációjában.
+            \item Az infrastruktúra lehet a szervezet telephelyén vagy azon kívül.
+            \item Nagyobb kontroll és biztonság, de magasabb költségek és kevesebb skálázhatóság jellemzi.
+        \end{itemize}
+
+        \item \textbf{Példa:} Egy vállalat saját adatközpontja, amit kizárólag a saját alkalmazottai használnak.
+    \end{itemize}
+
+    \subsubsection{Publikus felhő}
+
+    \begin{itemize}
+        \item \textbf{Definíció:} A felhő infrastruktúra nyilvános használatra áll rendelkezésre a nagyközönség számára.
+
+        \item \textbf{Jellemzők:}
+        \begin{itemize}
+            \item Lehet üzleti, akadémiai vagy kormányzati szervezet tulajdonában, kezelésében és üzemeltetésében, vagy ezek valamely kombinációjában.
+            \item A felhőszolgáltató telephelyén létezik.
+            \item Nagyobb rugalmasság és skálázhatóság, de potenciálisan alacsonyabb biztonság és kontroll jellemzi.
+        \end{itemize}
+
+        \item \textbf{Példák:} Amazon Web Services (AWS), Microsoft Azure, Google Cloud Platform (GCP).
+    \end{itemize}
+
+    \subsubsection{Hibrid felhő}
+
+    \begin{itemize}
+        \item \textbf{Definíció:} A felhő infrastruktúra két vagy több különálló felhő infrastruktúra (privát, közösségi vagy nyilvános) kompozíciója.
+
+        \item \textbf{Jellemzők:}
+        \begin{itemize}
+            \item Az infrastruktúrák egyedi entitások maradnak, de szabványosított vagy tulajdonosi technológiák kötik össze őket.
+            \item Lehetővé teszi az adatok és alkalmazások hordozhatóságát.
+            \item Kombinálja a privát és publikus felhők előnyeit, de növeli a komplexitást.
+        \end{itemize}
+
+        \item \textbf{Példa:} Egy vállalat, amely érzékeny adatait privát felhőben tárolja, de a nagy számítási igényű feladatokat publikus felhőbe helyezi át csúcsidőszakokban.
+    \end{itemize}
+
+    \subsubsection{Közösségi felhő}
+
+    \begin{itemize}
+        \item \textbf{Definíció:} A felhő infrastruktúrát több szervezet közösen használja, amelyek egy specifikus közösséget alkotnak közös érdekekkel (pl. küldetés, biztonsági követelmények, megfelelőségi szempontok).
+
+        \item \textbf{Jellemzők:}
+        \begin{itemize}
+            \item Lehet a közösség egy vagy több szervezetének tulajdonában, kezelésében és üzemeltetésében, vagy egy harmadik fél tulajdonában és kezelésében, vagy ezek valamely kombinációjában.
+            \item Az infrastruktúra lehet a szervezetek telephelyén vagy azon kívül.
+            \item Megosztja az erőforrásokat és költségeket több szervezet között, de korlátozottabb, mint a publikus felhő.
+        \end{itemize}
+
+        \item \textbf{Példa:} Több egyetem által közösen használt kutatási felhő infrastruktúra.
+    \end{itemize}
+
+    Ezek a kialakítási modellek nem kizárólagosak, és gyakran kombinálhatók a szervezetek egyedi igényeinek megfelelően. A választás függ a szervezet méretétől, biztonsági követelményeitől, költségvetésétől és az elvárt teljesítménytől.
+
+    \subsection{Felhasználási mintázatok}
+
+    A felhőszámítási rendszerek különböző felhasználási mintázatokat tesznek lehetővé, amelyek segítik a szervezeteket abban, hogy hatékonyan kihasználják a felhő előnyeit\footnote{Forrás: cloud.pdf, 27-28. dia}. Ezek a mintázatok jellemzően a felhő rugalmasságára és skálázhatóságára építenek.
+
+    \subsubsection{Tipikus felhasználási mintázatok}
+
+    \begin{enumerate}
+        \item \textbf{Állandó terhelés:}
+        \begin{itemize}
+            \item Jellemzés: Az erőforrás-igény viszonylag állandó és előre jelezhető.
+            \item Példa: Vállalati belső alkalmazások, amelyeket a munkaidőben használnak.
+            \item Felhő előnye: Költséghatékony infrastruktúra biztosítása állandó terhelésre.
+        \end{itemize}
+
+        \item \textbf{Növekvő terhelés:}
+        \begin{itemize}
+            \item Jellemzés: Az erőforrás-igény fokozatosan növekszik idővel.
+            \item Példa: Startup vállalkozás, amely folyamatosan bővíti felhasználói bázisát.
+            \item Felhő előnye: Rugalmas skálázhatóság a növekvő igényeknek megfelelően.
+        \end{itemize}
+
+        \item \textbf{Kiszámítható, időszakos terhelés:}
+        \begin{itemize}
+            \item Jellemzés: Az erőforrás-igény rendszeresen ingadozik, de előre jelezhető módon.
+            \item Példa: Weboldal forgalom, amely napközben magasabb, éjszaka alacsonyabb.
+            \item Felhő előnye: Automatikus skálázás az igényeknek megfelelően, költséghatékony erőforrás-kihasználás.
+        \end{itemize}
+
+        \item \textbf{Kiszámíthatatlan terhelési csúcsok:}
+        \begin{itemize}
+            \item Jellemzés: Hirtelen, előre nem látható erőforrás-igény növekedések.
+            \item Példa: Viral marketing kampány, amely hirtelen megnöveli a weboldal forgalmát.
+            \item Felhő előnye: Gyors skálázás a váratlan terhelés kezelésére, túlterhelés elkerülése.
+        \end{itemize}
+
+        \item \textbf{Batch feldolgozás:}
+        \begin{itemize}
+            \item Jellemzés: Nagy mennyiségű adat feldolgozása meghatározott időközönként.
+            \item Példa: Éjszakai adatelemzés, havi jelentések generálása.
+            \item Felhő előnye: Nagy számítási kapacitás rövid idejű biztosítása, költséghatékony módon.
+        \end{itemize}
+    \end{enumerate}
+
+    \subsubsection{Felhőszámítás előnyei a felhasználási mintázatok tükrében}
+
+    \begin{itemize}
+        \item \textbf{Rugalmasság:} A felhő lehetővé teszi az erőforrások gyors növelését vagy csökkentését a változó igényeknek megfelelően.
+
+        \item \textbf{Költséghatékonyság:} A "pay-as-you-go" modell révén a felhasználók csak a ténylegesen használt erőforrásokért fizetnek.
+
+        \item \textbf{Skálázhatóság:} A felhő képes kezelni a hirtelen megnövekedett terhelést anélkül, hogy előre be kellene ruházni nagy kapacitású infrastruktúrába.
+
+        \item \textbf{Globális elérhetőség:} A felhőszolgáltatók globális infrastruktúrája lehetővé teszi az alkalmazások világszerte történő gyors telepítését és elérését.
+
+        \item \textbf{Innováció támogatása:} A felhő lehetővé teszi új ötletek gyors tesztelését és implementálását anélkül, hogy jelentős kezdeti beruházásra lenne szükség.
+    \end{itemize}
+
+    A felhasználási mintázatok megértése és a felhő előnyeinek kihasználása lehetővé teszi a szervezetek számára, hogy optimalizálják erőforrás-felhasználásukat, csökkentsék költségeiket, és javítsák alkalmazásaik teljesítményét és megbízhatóságát.
+
+    \newpage
+
+
+    \section{Felhőszámítási rendszerek alapjai: előnyök, technikai, üzleti és emberi tényezők}
+
+    \subsection{Előnyök felhasználói oldalról}
+
+    A felhőszámítás számos előnyt kínál a felhasználók számára\footnote{Forrás: cloud.pdf, 29. dia}:
+
+    \begin{enumerate}
+        \item \textbf{Alacsonyabb költségek:}
+        \begin{itemize}
+            \item A felhő hálózatok magasabb hatékonysággal és jobb kihasználtsággal működnek, ami jelentős költségcsökkentést eredményez.
+            \item A felhasználóknak nem kell nagy kezdeti beruházást tenniük az infrastruktúrába.
+        \end{itemize}
+
+        \item \textbf{Könnyű használat:}
+        \begin{itemize}
+            \item A szolgáltatás típusától függően előfordulhat, hogy nincs szükség hardver vagy szoftver licencek beszerzésére.
+            \item A felhasználók gyorsan és egyszerűen hozzáférhetnek az erőforrásokhoz.
+        \end{itemize}
+
+        \item \textbf{Szolgáltatásminőség (QoS):}
+        \begin{itemize}
+            \item A szolgáltatásminőség szerződésben garantálható a szolgáltató által.
+            \item Ez biztosítja a felhasználók számára a megbízható és kiszámítható teljesítményt.
+        \end{itemize}
+
+        \item \textbf{Megbízhatóság:}
+        \begin{itemize}
+            \item A felhőszámítási hálózatok mérete és terheléselosztási képessége miatt rendkívül megbízhatóak.
+            \item Gyakran megbízhatóbbak, mint amit egy szervezet önállóan el tudna érni.
+        \end{itemize}
+
+        \item \textbf{Kiszervezett IT menedzsment:}
+        \begin{itemize}
+            \item A felhő lehetővé teszi, hogy valaki más kezelje a számítási infrastruktúrát, míg a felhasználó az üzletre koncentrálhat.
+            \item Ez jelentős csökkenést eredményezhet az IT személyzeti költségekben.
+        \end{itemize}
+
+        \item \textbf{Egyszerűsített karbantartás és frissítés:}
+        \begin{itemize}
+            \item Mivel a rendszer központosított, a javítások és frissítések könnyen alkalmazhatók.
+            \item A felhasználók mindig hozzáférhetnek a szoftverek legújabb verzióihoz.
+        \end{itemize}
+
+        \item \textbf{Alacsony belépési küszöb:}
+        \begin{itemize}
+            \item Különösen a kezdeti tőkekiadások drasztikusan csökkennek.
+            \item Ez lehetővé teszi kisebb vállalkozások számára is a csúcstechnológiához való hozzáférést.
+        \end{itemize}
+    \end{enumerate}
+
+    \subsection{Előnyök szolgáltatói oldalról}
+
+    A felhőszolgáltatók számára is számos előnyt kínál ez a modell\footnote{Forrás: cloud.pdf, 30. dia}:
+
+    \begin{enumerate}
+        \item \textbf{Nyereségesség:}
+        \begin{itemize}
+            \item A méretgazdaságosság miatt ez egy nyereséges üzleti modell lehet.
+        \end{itemize}
+
+        \item \textbf{Optimalizálás:}
+        \begin{itemize}
+            \item Az infrastruktúra már létezik és nincs teljesen kihasználva.
+            \item Példa: Amazon Web Services.
+        \end{itemize}
+
+        \item \textbf{Stratégiai előny:}
+        \begin{itemize}
+            \item A felhőszámítási platform kiterjeszti a vállalat termékeit és védi a franchise-t.
+            \item Példa: Microsoft Windows Azure Platform.
+        \end{itemize}
+
+        \item \textbf{Kiterjesztés:}
+        \begin{itemize}
+            \item Egy márkázott felhőszámítási platform kiterjesztheti az ügyfélkapcsolatokat további szolgáltatási opciók kínálásával.
+            \item Példa: IBM Global Services és a különböző IBM felhőszolgáltatások.
+        \end{itemize}
+
+        \item \textbf{Jelenlét:}
+        \begin{itemize}
+            \item Lehetőség egy piaci jelenlét kialakítására, mielőtt egy nagy versenytárs megjelenhetne.
+            \item Példa: Google App Engine lehetővé teszi a fejlesztők számára az alkalmazások azonnali skálázását.
+        \end{itemize}
+
+        \item \textbf{Platform:}
+        \begin{itemize}
+            \item Egy felhőszolgáltató központi csomóponttá válhat sok ISV (Independent Software Vendor) kínálatának középpontjában.
+            \item Példa: A SalesForce.com CRM szolgáltató Force.com nevű fejlesztési platformja, amely egy PaaS ajánlat.
+        \end{itemize}
+    \end{enumerate}
+
+    \subsection{Technikai tényezők}
+
+    A felhőszámítás bevezetése és használata során számos technikai tényezőt kell figyelembe venni\footnote{Forrás: cloud.pdf, 35-37. dia}:
+
+    \begin{enumerate}
+        \item \textbf{Hálózati szűk keresztmetszetek:}
+        \begin{itemize}
+            \item Nagy adathalmazok átvitelekor hálózati szűk keresztmetszetek alakulhatnak ki.
+            \item A helyi hálózatok (LAN) jobban kezelik az átviteleket, mint a felhőszámításban használt WAN kapcsolatok.
+        \end{itemize}
+
+        \item \textbf{Biztonság:}
+        \begin{itemize}
+            \item A különböző bizalmi mechanizmusok miatt az alkalmazásokat másképp kell strukturálni és a műveleteket módosítani kell.
+            \item A felhőben az adatok biztonságát és az alkalmazások védelmét másképp kell megközelíteni.
+        \end{itemize}
+
+        \item \textbf{Szoftver stack:}
+        \begin{itemize}
+            \item A felhő standardizálást kényszerít ki és csökkenti a rendszer testreszabhatóságát.
+            \item Ez korlátozhatja bizonyos speciális igények kielégítését.
+        \end{itemize}
+
+        \item \textbf{Tárolás:}
+        \begin{itemize}
+            \item A helyi rendszerekben az enterprise osztályú tárolás a felhasználó ellenőrzése alatt áll és támogathatja a nagy sebességű lekérdezéseket.
+            \item A felhőszámításban nagy adattárolók lehetségesek, de többnyire alacsony sávszélességű kapcsolattal.
+        \end{itemize}
+    \end{enumerate}
+
+    \subsection{Üzleti tényezők}
+
+    Az üzleti szempontok is jelentős szerepet játszanak a felhőszámítás adoptálásában\footnote{Forrás: cloud.pdf, 35-37. dia}:
+
+    \begin{enumerate}
+        \item \textbf{Számviteli kezelés:}
+        \begin{itemize}
+            \item A privát rendszerekben a működéssel kapcsolatos költségek fix jellegűek a licencek miatt, és valamilyen formula vagy használati modell alapján kell visszaosztani a számlákra.
+            \item A felhőszámítás esetében a használat alapú fizetési modell lehetővé teszi, hogy a költségeket közvetlenül az egyes számlákhoz rendeljék.
+        \end{itemize}
+
+        \item \textbf{Megfelelőség:}
+        \begin{itemize}
+            \item A törvényeknek és szabályzatoknak való megfelelés földrajzi területenként változik.
+            \item Ez megköveteli, hogy a felhő alkalmazkodjon több megfelelőségi rendszerhez is.
+        \end{itemize}
+
+        \item \textbf{Szolgáltatási szint megállapodások (SLA):}
+        \begin{itemize}
+            \item A felhő SLA-k standardizáltak, hogy a felhasználók többségének megfeleljenek.
+            \item A felhő SLA-k általában nem kínálnak iparági standard visszatérítési rátákat.
+            \item Az üzleti kockázatokat, amelyeket egy felhő SLA nem fed le, figyelembe kell venni.
+        \end{itemize}
+
+        \item \textbf{Vendor lock-in:}
+        \begin{itemize}
+            \item A helyi telepítéseknél a vendor lock-in az adott vállalat és alkalmazás függvénye.
+            \item A felhőszolgáltatóknál a vendor lock-in növekszik az IaaS-tól a SaaS modell felé haladva.
+        \end{itemize}
+    \end{enumerate}
+
+    \subsection{Emberi tényezők}
+
+    Az emberi tényezők jelentős szerepet játszanak a felhőszámítás elfogadásában és használatában\footnote{Forrás: cloud.pdf, 32-33. dia}:
+
+    \begin{enumerate}
+        \item \textbf{Kockázat- és veszteségkerülés:}
+        \begin{itemize}
+            \item Az emberek általában kerülik a kockázatokat és a veszteségeket.
+            \item Ez befolyásolhatja a felhőszolgáltatások elfogadását, különösen ha bizonytalanság van a biztonság vagy az adatvédelem terén.
+        \end{itemize}
+
+        \item \textbf{Ingyenes szolgáltatások preferálása:}
+        \begin{itemize}
+            \item Az emberek előnyben részesítik az ingyenes dolgokat.
+            \item Ez magyarázhatja a freemium modell sikerét sok felhőszolgáltatásnál.
+        \end{itemize}
+
+        \item \textbf{Átalánydíjas elfogultság:}
+        \begin{itemize}
+            \item Az emberek gyakran preferálják az átalánydíjas modelleket.
+            \item Ez kihívást jelenthet a használat alapú felhőszolgáltatások esetében.
+        \end{itemize}
+
+        \item \textbf{Kontroll és anonimitás igénye:}
+        \begin{itemize}
+            \item Az embereknek szükségük van arra, hogy kontrollálják környezetüket és megőrizzék anonimitásukat.
+            \item Ez konfliktusba kerülhet a felhőszolgáltatások centralizált természetével.
+        \end{itemize}
+
+        \item \textbf{Változástól való félelem:}
+        \begin{itemize}
+            \item Az emberek általában félnek a változástól.
+            \item Ez akadályozhatja a felhőszolgáltatások gyors elfogadását.
+        \end{itemize}
+
+        \item \textbf{Status quo preferencia:}
+        \begin{itemize}
+            \item Az emberek hajlamosak a jelenlegi állapotot preferálni és ennek megfelelően befektetni.
+            \item Ez megnehezítheti a meglévő rendszerekről való átállást a felhőre.
+        \end{itemize}
+
+        \item \textbf{Azonnali jutalom preferálása:}
+        \begin{itemize}
+            \item Az emberek hajlamosak alábecsülni a jövőbeli kockázatokat és előnyben részesíteni az azonnali jutalmat.
+            \item Ez befolyásolhatja a hosszú távú felhőstratégiák kialakítását.
+        \end{itemize}
+
+        \item \textbf{Státusz iránti igény:}
+        \begin{itemize}
+            \item Az embereknek szükségük van a státuszra.
+            \item Ez befolyásolhatja a felhőszolgáltatások kiválasztását és használatát.
+        \end{itemize}
+
+        \item \textbf{Választás által okozott bénultság:}
+        \begin{itemize}
+            \item Az embereket megbéníthatja a túl sok választási lehetőség.
+            \item Ez kihívást jelenthet a sokféle felhőszolgáltatás és -konfiguráció között való választásnál.
+        \end{itemize}
+    \end{enumerate}
+
+    Ezek a tényezők együttesen befolyásolják a felhőszámítás elfogadását és használatát mind egyéni, mind szervezeti szinten. A sikeres felhőadaptáció során figyelembe kell venni ezeket a technikai, üzleti és emberi szempontokat.
+
+    \newpage
+
+
+    \section{OpenStack felhő: architektúra és alapvető működési mechanizmusok}
+
+    \subsection{OpenStack bevezetés}
+
+    Az OpenStack egy nyílt forráskódú felhőszámítási platform, amely lehetővé teszi nagy méretű, skálázható és megbízható privát és publikus felhők létrehozását és kezelését\footnote{Forrás: cloud.pdf, 43-44. dia}.
+
+    \subsubsection{OpenStack jellemzői}
+
+    \begin{itemize}
+        \item \textbf{Nyílt forráskód:} Az OpenStack szabadon elérhető és módosítható, ami rugalmasságot és testreszabhatóságot biztosít.
+        \item \textbf{Moduláris felépítés:} Különböző szolgáltatások (komponensek) együttműködéséből áll, amelyek külön-külön is fejleszthetők és telepíthetők.
+        \item \textbf{Skálázhatóság:} Képes kezelni nagy mennyiségű erőforrást és felhasználót.
+        \item \textbf{API-vezérelt:} Minden szolgáltatás rendelkezik saját API-val, ami lehetővé teszi a programozott hozzáférést és automatizálást.
+        \item \textbf{Többféle hypervisor támogatása:} Támogatja a KVM, Xen, VMware és más virtualizációs technológiákat.
+    \end{itemize}
+
+    \subsection{OpenStack architektúra}
+
+    Az OpenStack architektúrája több fő komponensből áll, amelyek együttműködve biztosítják a felhőszolgáltatásokat\footnote{Forrás: cloud.pdf, 45-46. dia}.
+
+    \subsubsection{Fő komponensek}
+
+    \begin{enumerate}
+        \item \textbf{Nova (Compute):} Virtuális gépek létrehozásáért és kezeléséért felelős.
+        \item \textbf{Neutron (Networking):} Hálózatkezelést és virtuális hálózatok létrehozását biztosítja.
+        \item \textbf{Swift (Object Storage):} Skálázható objektumtárolást nyújt.
+        \item \textbf{Cinder (Block Storage):} Blokkszintű tárolást biztosít a virtuális gépek számára.
+        \item \textbf{Keystone (Identity):} Felhasználók hitelesítéséért és jogosultságkezelésért felelős.
+        \item \textbf{Glance (Image):} Virtuális gép képfájlok tárolását és kezelését végzi.
+        \item \textbf{Horizon (Dashboard):} Webes felhasználói felületet biztosít az OpenStack szolgáltatások kezeléséhez.
+    \end{enumerate}
+
+    \subsubsection{Architektúra áttekintése}
+
+    Az OpenStack architektúrája egy többrétegű modellt követ:
+
+    \begin{itemize}
+        \item \textbf{Felhasználói réteg:} Ide tartozik a Horizon dashboard és a különböző API-k.
+        \item \textbf{Vezérlő réteg:} Itt találhatók a fő szolgáltatások (Nova, Neutron, stb.).
+        \item \textbf{Erőforrás réteg:} Ez tartalmazza a fizikai és virtuális erőforrásokat (szerverek, tárolók, hálózati eszközök).
+    \end{itemize}
+
+    Az egyes komponensek API-kon keresztül kommunikálnak egymással, ami lehetővé teszi a rugalmas és skálázható működést.
+
+    \subsection{OpenStack fő komponensek működése}
+
+    \subsubsection{Nova (Compute)}
+
+    Nova az OpenStack számítási szolgáltatása, amely felelős a virtuális gépek (VM-ek) létrehozásáért és kezeléséért\footnote{Forrás: cloud.pdf, 69-71. dia}.
+
+    \begin{itemize}
+        \item \textbf{Fő funkciók:}
+        \begin{itemize}
+            \item VM-ek életciklusának kezelése (indítás, leállítás, felfüggesztés, újraindítás)
+            \item Erőforrás-allokáció és -ütemezés
+            \item Különböző hypervisorok támogatása (KVM, Xen, VMware, stb.)
+        \end{itemize}
+
+        \item \textbf{Komponensek:}
+        \begin{itemize}
+            \item \texttt{nova-api}: REST API-t biztosít a Nova szolgáltatáshoz
+            \item \texttt{nova-compute}: VM-ek létrehozása és törlése a hypervisoron keresztül
+            \item \texttt{nova-scheduler}: Meghatározza, melyik hoston fusson egy új VM
+            \item \texttt{nova-conductor}: Adatbázis-műveletek és más szolgáltatások közötti kommunikáció
+        \end{itemize}
+
+        \item \textbf{Működési mechanizmus:}
+        \begin{enumerate}
+            \item Felhasználó VM-indítási kérést küld az API-n keresztül
+            \item A scheduler kiválasztja a megfelelő compute node-ot
+            \item A nova-compute szolgáltatás létrehozza a VM-et a kiválasztott node-on
+            \item A VM állapotát és metaadatait a Nova adatbázisban tárolja
+        \end{enumerate}
+    \end{itemize}
+
+    \subsubsection{Neutron (Networking)}
+
+    Neutron az OpenStack hálózati szolgáltatása, amely lehetővé teszi a komplex virtuális hálózati topológiák létrehozását és kezelését\footnote{Forrás: cloud.pdf, 72-76. dia}.
+
+    \begin{itemize}
+        \item \textbf{Fő funkciók:}
+        \begin{itemize}
+            \item Virtuális hálózatok és alhálózatok létrehozása
+            \item IP-címkezelés (DHCP)
+            \item Virtuális routerek és tűzfalak konfigurálása
+            \item Terheléselosztás és VPN szolgáltatások
+        \end{itemize}
+
+        \item \textbf{Komponensek:}
+        \begin{itemize}
+            \item \texttt{neutron-server}: API kérések feldolgozása és adatbázis-műveletek
+            \item \texttt{neutron-*-agent}: Hálózati műveletek végrehajtása a compute és network node-okon
+            \item \texttt{neutron-dhcp-agent}: DHCP szolgáltatás biztosítása a virtuális hálózatoknak
+            \item \texttt{neutron-l3-agent}: L3/NAT forwarding virtuális routerek számára
+        \end{itemize}
+
+        \item \textbf{Működési mechanizmus:}
+        \begin{enumerate}
+            \item Felhasználó hálózati erőforrás létrehozását kéri az API-n keresztül
+            \item Neutron-server feldolgozza a kérést és frissíti az adatbázist
+            \item Megfelelő agent-ek végrehajtják a szükséges hálózati konfigurációkat
+            \item Virtuális interfészek csatlakoztatása a VM-ekhez
+        \end{enumerate}
+    \end{itemize}
+
+    \subsubsection{Keystone (Identity)}
+
+    Keystone az OpenStack identitáskezelő szolgáltatása, amely központosított felhasználó- és jogosultságkezelést biztosít\footnote{Forrás: cloud.pdf, 53-55. dia}.
+
+    \begin{itemize}
+        \item \textbf{Fő funkciók:}
+        \begin{itemize}
+            \item Felhasználók és projektek (tenant-ok) kezelése
+            \item Hitelesítés és jogosultságkezelés
+            \item Token-alapú hozzáférés biztosítása
+            \item Szolgáltatáskatalógus kezelése
+        \end{itemize}
+
+        \item \textbf{Komponensek:}
+        \begin{itemize}
+            \item \texttt{keystone-all}: Az összes Keystone szolgáltatást futtató daemon
+            \item Identity backend: Felhasználói és csoportadatok tárolása
+            \item Token backend: Tokenek tárolása és kezelése
+            \item Catalog backend: Szolgáltatáskatalógus tárolása
+        \end{itemize}
+
+        \item \textbf{Működési mechanizmus:}
+        \begin{enumerate}
+            \item Felhasználó hitelesítési kérést küld
+            \item Keystone ellenőrzi a hitelesítő adatokat
+            \item Sikeres hitelesítés esetén token generálása
+            \item Token használata további API kéréseknél
+        \end{enumerate}
+    \end{itemize}
+
+    \subsubsection{Glance (Image Service)}
+
+    Glance az OpenStack képfájl-kezelő szolgáltatása, amely felelős a virtuális gépek lemezképeinek tárolásáért és kezeléséért\footnote{Forrás: cloud.pdf, 56-59. dia}.
+
+    \begin{itemize}
+        \item \textbf{Fő funkciók:}
+        \begin{itemize}
+            \item VM-képfájlok tárolása és katalogizálása
+            \item Képfájlok metaadatainak kezelése
+            \item Különböző formátumok támogatása (raw, qcow2, vmdk, stb.)
+            \item Képfájlok feltöltése és letöltése
+        \end{itemize}
+
+        \item \textbf{Komponensek:}
+        \begin{itemize}
+            \item \texttt{glance-api}: REST API-t biztosít a képfájl-műveletek végrehajtásához
+            \item \texttt{glance-registry}: Képfájlok metaadatainak tárolása és kezelése
+            \item Image Store: Tényleges képfájlok tárolása (lehet fájlrendszer, Swift objektumtároló, stb.)
+        \end{itemize}
+
+        \item \textbf{Működési mechanizmus:}
+        \begin{enumerate}
+            \item Felhasználó képfájl-műveletet kezdeményez az API-n keresztül
+            \item Glance-api feldolgozza a kérést
+            \item Metaadatok kezelése a glance-registry segítségével
+            \item Képfájlok tárolása vagy lekérése az Image Store-ból
+        \end{enumerate}
+    \end{itemize}
+
+    \subsubsection{Swift (Object Storage)}
+
+    Swift az OpenStack objektumtároló szolgáltatása, amely nagy mennyiségű strukturálatlan adat tárolására és lekérésére szolgál\footnote{Forrás: cloud.pdf, 84-89. dia}.
+
+    \begin{itemize}
+        \item \textbf{Fő funkciók:}
+        \begin{itemize}
+            \item Skálázható és redundáns objektumtárolás
+            \item RESTful API hozzáférés
+            \item Verziókövetés és hozzáférés-szabályozás
+            \item Automatikus replikáció és helyreállítás
+        \end{itemize}
+
+        \item \textbf{Komponensek:}
+        \begin{itemize}
+            \item \texttt{swift-proxy}: Kérések fogadása és továbbítása
+            \item \texttt{swift-account}: Fiókok kezelése
+            \item \texttt{swift-container}: Konténerek kezelése
+            \item \texttt{swift-object}: Objektumok tárolása és lekérése
+        \end{itemize}
+
+        \item \textbf{Működési mechanizmus:}
+        \begin{enumerate}
+            \item Felhasználó objektumműveletet kezdeményez az API-n keresztül
+            \item Swift-proxy fogadja és hitelesíti a kérést
+            \item A kérés továbbítása a megfelelő swift-account, swift-container vagy swift-object szolgáltatásnak
+            \item Objektumok tárolása vagy lekérése a háttértárolóból
+            \item Automatikus replikáció a redundancia biztosítására
+        \end{enumerate}
+    \end{itemize}
+
+    \subsubsection{Cinder (Block Storage)}
+
+    Cinder az OpenStack blokkszintű tárolószolgáltatása, amely perzisztens tárolóeszközöket biztosít a virtuális gépek számára\footnote{Forrás: cloud.pdf, 77-83. dia}.
+
+    \begin{itemize}
+        \item \textbf{Fő funkciók:}
+        \begin{itemize}
+            \item Blokkeszközök létrehozása, csatolása és leválasztása
+            \item Kötet-pillanatképek (snapshotok) kezelése
+            \item Különböző tárolórendszerek támogatása (LVM, Ceph, NFS, stb.)
+            \item Kötetek titkosítása és replikációja
+        \end{itemize}
+
+        \item \textbf{Komponensek:}
+        \begin{itemize}
+            \item \texttt{cinder-api}: REST API-t biztosít a blokkeszköz-műveletek végrehajtásához
+            \item \texttt{cinder-scheduler}: Meghatározza, melyik tárolónode-on jöjjön létre egy új kötet
+            \item \texttt{cinder-volume}: Blokkeszközök kezelése a háttértárolón
+            \item \texttt{cinder-backup}: Kötetek biztonsági mentése és visszaállítása
+        \end{itemize}
+
+        \item \textbf{Működési mechanizmus:}
+        \begin{enumerate}
+            \item Felhasználó blokkeszköz-műveletet kezdeményez az API-n keresztül
+            \item Cinder-api feldolgozza a kérést
+            \item Cinder-scheduler kiválasztja a megfelelő tárolónode-ot
+            \item Cinder-volume létrehozza vagy kezeli a blokkeszközt a kiválasztott node-on
+            \item Blokkeszköz csatolása vagy leválasztása a virtuális géphez/ről
+        \end{enumerate}
+    \end{itemize}
+
+    \subsection{OpenStack szolgáltatások együttműködése}
+
+    Az OpenStack komponensei szorosan együttműködnek a felhőszolgáltatások biztosítása érdekében:
+
+    \begin{itemize}
+        \item \textbf{VM létrehozása:} Nova használja a Glance-t a képfájl lekéréséhez, Cinder-t a tárolókötet csatolásához, és Neutron-t a hálózati kapcsolat beállításához.
+        \item \textbf{Hitelesítés:} Minden szolgáltatás a Keystone-t használja a felhasználók hitelesítéséhez és jogosultságkezeléshez.
+        \item \textbf{Hálózatkezelés:} Nova és Neutron együttműködik a VM-ek hálózati konfigurációjának beállításában.
+        \item \textbf{Tároláskezelés:} Glance használhatja a Swift-et képfájlok tárolására, míg Cinder biztosítja a blokkszintű tárolást a VM-ek számára.
+    \end{itemize}
+
+    Ez az együttműködés teszi lehetővé az OpenStack számára, hogy egy teljes, integrált felhőszámítási platformot biztosítson.
+
+    \newpage
+
+
+    \section{OpenStack Keystone: biztonsági jellemzők, alapkoncepciók és mechanizmusok}
+
+    \subsection{Keystone bevezetés és alapkoncepciók}
+
+    Keystone az OpenStack identitáskezelő szolgáltatása, amely központosított felhasználó- és jogosultságkezelést biztosít az OpenStack környezetben\footnote{Forrás: cloud.pdf, 53-55. dia}.
+
+    \subsubsection{Keystone fő funkciói}
+
+    \begin{itemize}
+        \item \textbf{Felhasználókezelés:} Felhasználók létrehozása, módosítása és törlése.
+        \item \textbf{Hitelesítés:} Felhasználók azonosítása és hitelesítése.
+        \item \textbf{Jogosultságkezelés:} Felhasználói jogosultságok és szerepkörök kezelése.
+        \item \textbf{Projektkezelés:} Erőforrások logikai csoportosítása projektek (tenantek) szerint.
+        \item \textbf{Szolgáltatáskatalógus:} OpenStack szolgáltatások és azok végpontjainak nyilvántartása.
+        \item \textbf{Token kibocsátás és érvényesítés:} Ideiglenes hozzáférési tokenek kezelése.
+    \end{itemize}
+
+    \subsubsection{Keystone alapkoncepciók}
+
+    \begin{enumerate}
+        \item \textbf{Felhasználó (User):} Egy személy, rendszer vagy szolgáltatás, amely használja az OpenStack szolgáltatásokat.
+
+        \item \textbf{Hitelesítő adat (Credential):} Adat, amely a felhasználó identitását igazolja (pl. jelszó, API kulcs).
+
+        \item \textbf{Hitelesítés (Authentication):} A felhasználó identitásának ellenőrzése.
+
+        \item \textbf{Token:} Egy ideiglenes hitelesítő adat, amely egy sikeres hitelesítés után jön létre.
+
+        \item \textbf{Projekt (Project/Tenant):} Erőforrások logikai csoportja, amely izolációt biztosít különböző felhasználók és csoportok között.
+
+        \item \textbf{Szolgáltatás (Service):} Egy OpenStack szolgáltatás, például Nova vagy Glance.
+
+        \item \textbf{Végpont (Endpoint):} Egy hálózati cím, ahol egy szolgáltatás elérhető.
+
+        \item \textbf{Szerepkör (Role):} Egy felhasználóhoz rendelt jogosultsági szint vagy feladatkör.
+
+        \item \textbf{Tartomány (Domain):} Adminisztratív határvonal a projektek, csoportok és felhasználók felett.
+    \end{enumerate}
+
+    \subsection{Keystone architektúra}
+
+    A Keystone szolgáltatás több komponensből áll, amelyek együttműködve biztosítják az identitáskezelési funkciókat:
+
+    \begin{itemize}
+        \item \textbf{Identity:} Felhasználók és csoportok adatainak tárolása és kezelése.
+        \item \textbf{Resource:} Projektek és tartományok kezelése.
+        \item \textbf{Assignment:} Szerepkörök hozzárendelése felhasználókhoz és csoportokhoz.
+        \item \textbf{Token:} Tokenek létrehozása és érvényesítése.
+        \item \textbf{Catalog:} Szolgáltatások és végpontok nyilvántartása.
+        \item \textbf{Policy:} Szabályzatok kezelése és érvényesítése.
+    \end{itemize}
+
+    Ezek a komponensek moduláris felépítést biztosítanak, lehetővé téve a rugalmas konfigurációt és bővíthetőséget.
+
+    \subsection{Keystone biztonsági jellemzők és mechanizmusok}
+
+    \subsubsection{Hitelesítési módszerek}
+
+    Keystone több hitelesítési módszert támogat a rugalmas és biztonságos azonosítás érdekében\footnote{Forrás: cloud.pdf, 54. dia}:
+
+    \begin{itemize}
+        \item \textbf{Jelszó alapú hitelesítés:}
+        \begin{itemize}
+            \item Felhasználónév és jelszó páros használata
+            \item Alapértelmezett módszer, de nem ajánlott production környezetben önmagában
+        \end{itemize}
+
+        \item \textbf{Token alapú hitelesítés:}
+        \begin{itemize}
+            \item Ideiglenes tokenek használata ismételt hitelesítéshez
+            \item Csökkenti a hitelesítő adatok átvitelének szükségességét
+        \end{itemize}
+
+        \item \textbf{Többfaktoros hitelesítés (MFA):}
+        \begin{itemize}
+            \item Több hitelesítési faktor kombinálása (pl. jelszó + időalapú egyszer használatos jelszó)
+            \item Jelentősen növeli a biztonságot
+        \end{itemize}
+
+        \item \textbf{Külső hitelesítés integrációja:}
+        \begin{itemize}
+            \item LDAP vagy Active Directory integráció
+            \item Egyszeri bejelentkezés (SSO) támogatása
+            \item Külső identitásszolgáltatók (pl. SAML, OpenID Connect) használata
+        \end{itemize}
+    \end{itemize}
+
+    \subsubsection{Token kezelés}
+
+    A tokenek kulcsfontosságú szerepet játszanak a Keystone biztonsági modelljében:
+
+    \begin{itemize}
+        \item \textbf{Token típusok:}
+        \begin{itemize}
+            \item \textit{UUID tokenek:} Egyedi azonosítók, de gyakori adatbázis-lekérdezést igényelnek
+            \item \textit{PKI/PKIz tokenek:} Nagyobb méretűek, de tartalmazzák a szükséges információkat
+            \item \textit{Fernet tokenek:} Kompakt, nem igényelnek adatbázis-tárolást, titkosítottak
+        \end{itemize}
+
+        \item \textbf{Token életciklus:}
+        \begin{itemize}
+            \item Létrehozás sikeres hitelesítés után
+            \item Korlátozott élettartam (általában néhány óra)
+            \item Automatikus lejárat vagy manuális visszavonás
+        \end{itemize}
+
+        \item \textbf{Token érvényesítés:}
+        \begin{itemize}
+            \item Minden API kérés esetén ellenőrzés
+            \item Gyorsítótárazás a teljesítmény javítása érdekében
+        \end{itemize}
+    \end{itemize}
+
+    \subsubsection{Jogosultságkezelés}
+
+    A Keystone részletes jogosultságkezelést biztosít a biztonság és az erőforrás-izolálás érdekében:
+
+    \begin{itemize}
+        \item \textbf{Szerepkör alapú hozzáférés-vezérlés (RBAC):}
+        \begin{itemize}
+            \item Felhasználókhoz szerepköröket rendelnek
+            \item A szerepkörök határozzák meg a megengedett műveleteket
+            \item Finomhangolt jogosultságkezelést tesz lehetővé
+        \end{itemize}
+
+        \item \textbf{Projektek és tartományok:}
+        \begin{itemize}
+            \item Projektek: Erőforrások logikai csoportosítása és izolálása
+            \item Tartományok: Adminisztratív határvonalak a projektek és felhasználók felett
+            \item Hierarchikus struktúra a komplex szervezeti felépítések támogatására
+        \end{itemize}
+
+        \item \textbf{Szabályzatok (Policies):}
+        \begin{itemize}
+            \item JSON formátumú szabályok definiálása
+            \item Meghatározzák, mely szerepkörök milyen műveleteket hajthatnak végre
+            \item Testreszabható az egyes OpenStack szolgáltatásokhoz
+        \end{itemize}
+    \end{itemize}
+
+    \subsubsection{Szolgáltatáskatalógus és végpontkezelés}
+
+    A szolgáltatáskatalógus kritikus biztonsági szempontból, mivel meghatározza, hogyan érhetők el az OpenStack szolgáltatások:
+
+    \begin{itemize}
+        \item \textbf{Végpontok típusai:}
+        \begin{itemize}
+            \item Public: Nyilvánosan elérhető végpontok
+            \item Internal: Belső hálózaton elérhető végpontok
+            \item Admin: Adminisztratív műveletekhez használt végpontok
+        \end{itemize}
+
+        \item \textbf{Végpontok biztonsága:}
+        \begin{itemize}
+            \item HTTPS használata a kommunikáció titkosítására
+            \item Hozzáférés-vezérlés a különböző végponttípusokhoz
+        \end{itemize}
+
+        \item \textbf{Dinamikus frissítés:}
+        \begin{itemize}
+            \item Végpontok dinamikus frissítése szolgáltatás-kimaradás nélkül
+            \item Load balancing és failover támogatása
+        \end{itemize}
+    \end{itemize}
+
+    \subsubsection{Audit és naplózás}
+
+    A Keystone kiterjedt audit és naplózási funkciókat biztosít a biztonsági események nyomon követéséhez:
+
+    \begin{itemize}
+        \item \textbf{Eseménynaplózás:}
+        \begin{itemize}
+            \item Minden hitelesítési és jogosultságkezelési esemény naplózása
+            \item Sikeres és sikertelen bejelentkezési kísérletek rögzítése
+            \item Szerepkör- és projektmódosítások nyomon követése
+        \end{itemize}
+
+        \item \textbf{Integrálás központi naplókezelő rendszerekkel:}
+        \begin{itemize}
+            \item Syslog támogatás
+            \item Kompatibilitás SIEM (Security Information and Event Management) rendszerekkel
+        \end{itemize}
+
+        \item \textbf{Compliance támogatás:}
+        \begin{itemize}
+            \item Részletes naplók a megfelelőségi auditok támogatásához
+            \item Naplók integritásának védelme
+        \end{itemize}
+    \end{itemize}
+
+    \newpage
+
+
+    \section{OpenStack Nova és Glance: virtuális gépekre vonatkozó jellemzők, alapkoncepciók és mechanizmusok}
+
+    \subsection{Nova és Glance áttekintés}
+
+    \subsubsection{Nova (Compute Service)}
+
+    Nova az OpenStack számítási szolgáltatása, amely felelős a virtuális gépek (VM-ek) létrehozásáért, ütemezéséért és kezeléséért a felhő környezetben\footnote{Forrás: cloud.pdf, 69-71. dia}.
+
+    \textbf{Fő funkciók:}
+    \begin{itemize}
+        \item Virtuális gépek életciklusának kezelése
+        \item Erőforrás-allokáció és -ütemezés
+        \item Különböző hypervisorok támogatása (KVM, Xen, VMware, stb.)
+    \end{itemize}
+
+    \subsubsection{Glance (Image Service)}
+
+    Glance az OpenStack képfájl-kezelő szolgáltatása, amely a virtuális gépek lemezképeinek tárolásáért és kezeléséért felelős\footnote{Forrás: cloud.pdf, 56-59. dia}.
+
+    \textbf{Fő funkciók:}
+    \begin{itemize}
+        \item VM-képfájlok tárolása és katalogizálása
+        \item Képfájlok metaadatainak kezelése
+        \item Különböző képfájl formátumok támogatása
+    \end{itemize}
+
+    \subsection{Alapkoncepciók}
+
+    \subsubsection{Nova alapkoncepciók}
+
+    \begin{itemize}
+        \item \textbf{Instance (Példány):} Egy futó virtuális gép a felhőben.
+        \item \textbf{Flavor (Íz):} Előre definiált hardverkonfiguráció (CPU, memória, tárhely).
+        \item \textbf{Host:} Fizikai szerver, amelyen a virtuális gépek futnak.
+        \item \textbf{Hypervisor:} Szoftverréteg, amely lehetővé teszi több VM futtatását egy fizikai gépen.
+        \item \textbf{Compute Node:} Nova-compute szolgáltatást futtató host.
+        \item \textbf{Project (Tenant):} Erőforrások logikai csoportja, általában egy szervezethez vagy felhasználócsoporthoz kötve.
+    \end{itemize}
+
+    \subsubsection{Glance alapkoncepciók}
+
+    \begin{itemize}
+        \item \textbf{Image (Képfájl):} Virtuális lemez template, amely tartalmazza az operációs rendszert és egyéb szoftvereket.
+        \item \textbf{Snapshot:} Egy futó VM-ről készített pillanatkép, amely új képfájlként menthető.
+        \item \textbf{Image store:} A képfájlok tárolására szolgáló backend (pl. fájlrendszer, Swift objektumtároló).
+        \item \textbf{Image registry:} A képfájlok metaadatainak tárolására szolgáló adatbázis.
+        \item \textbf{Image format:} A képfájl formátuma (pl. raw, qcow2, vmdk).
+    \end{itemize}
+
+    \subsection{Nova architektúra és komponensek}
+
+    Nova több komponensből áll, amelyek együttműködve biztosítják a számítási szolgáltatásokat:
+
+    \begin{itemize}
+        \item \textbf{nova-api:} REST API-t biztosít a Nova szolgáltatáshoz.
+        \item \textbf{nova-compute:} VM-ek létrehozása és törlése a hypervisoron keresztül.
+        \item \textbf{nova-scheduler:} Meghatározza, melyik hoston fusson egy új VM.
+        \item \textbf{nova-conductor:} Adatbázis-műveletek és más szolgáltatások közötti kommunikáció.
+        \item \textbf{nova-consoleauth:} Felhasználók hitelesítése a konzoleléréshez.
+        \item \textbf{nova-novncproxy:} VNC alapú konzolelérést biztosít a VM-ekhez.
+    \end{itemize}
+
+    \subsection{Glance architektúra és komponensek}
+
+    Glance architektúrája a következő fő komponensekből áll:
+
+    \begin{itemize}
+        \item \textbf{glance-api:} REST API-t biztosít a képfájl-műveletek végrehajtásához.
+        \item \textbf{glance-registry:} Képfájlok metaadatainak tárolása és kezelése.
+        \item \textbf{Database:} Képfájlok metaadatainak tárolására szolgáló adatbázis.
+        \item \textbf{Image store:} A tényleges képfájlok tárolására szolgáló backend.
+    \end{itemize}
+
+    \subsection{Virtuális gépek jellemzői és kezelése}
+
+    \subsubsection{Virtuális gép életciklus}
+
+    A Nova szolgáltatás kezeli a virtuális gépek teljes életciklusát:
+
+    \begin{enumerate}
+        \item \textbf{Létrehozás:}
+        \begin{itemize}
+            \item Képfájl kiválasztása Glance-ból
+            \item Flavor (hardverkonfiguráció) meghatározása
+            \item Hálózati és tárolási erőforrások hozzárendelése
+        \end{itemize}
+
+        \item \textbf{Indítás:} VM elindítása a kiválasztott compute node-on
+
+        \item \textbf{Futás:} VM működése, erőforrások használata
+
+        \item \textbf{Felfüggesztés/Folytatás:} VM állapotának mentése memóriába és későbbi visszaállítása
+
+        \item \textbf{Leállítás:} VM szabályos leállítása
+
+        \item \textbf{Újraindítás:} VM újraindítása (soft vagy hard reset)
+
+        \item \textbf{Átméretezés:} VM erőforrásainak módosítása (új flavor alkalmazása)
+
+        \item \textbf{Snapshot készítés:} VM aktuális állapotának mentése új képfájlként
+
+        \item \textbf{Migráció:} VM áthelyezése másik compute node-ra
+
+        \item \textbf{Törlés:} VM és kapcsolódó erőforrások felszabadítása
+    \end{enumerate}
+
+    \subsubsection{Flavor management}
+
+    A flavorok előre definiált hardverkonfigurációk, amelyek meghatározzák a VM erőforrásait:
+
+    \begin{itemize}
+        \item \textbf{Jellemzők:} vCPU szám, RAM mennyiség, lemezméret, extra lemezek
+        \item \textbf{Flavor típusok:} Általános célú, számítás-optimalizált, memória-optimalizált, stb.
+        \item \textbf{Egyedi flavorok:} Adminisztrátorok létrehozhatnak testreszabott flavorokat
+    \end{itemize}
+
+    \subsubsection{Képfájl kezelés Glance-szal}
+
+    Glance felelős a VM képfájlok kezeléséért:
+
+    \begin{itemize}
+        \item \textbf{Képfájl formátumok:}
+        \begin{itemize}
+            \item Raw: Nyers lemezképfájl
+            \item QCOW2: QEMU Copy-On-Write v2, támogatja a thin provisioning-ot
+            \item VHD: Virtual Hard Disk, Microsoft Hyper-V formátum
+            \item VMDK: Virtual Machine Disk, VMware formátum
+        \end{itemize}
+
+        \item \textbf{Képfájl műveletek:}
+        \begin{itemize}
+            \item Feltöltés: Új képfájl hozzáadása a Glance tárolóhoz
+            \item Letöltés: Képfájl letöltése a Glance tárolóból
+            \item Másolás: Képfájl duplikálása
+            \item Módosítás: Képfájl metaadatainak frissítése
+            \item Törlés: Képfájl eltávolítása a tárolóból
+        \end{itemize}
+
+        \item \textbf{Metaadatok kezelése:}
+        \begin{itemize}
+            \item Név, leírás, formátum, architektúra, operációs rendszer
+            \item Egyedi metaadatok hozzáadása kulcs-érték párokként
+        \end{itemize}
+    \end{itemize}
+
+    \subsection{Virtuális gépek ütemezése és erőforrás-kezelés}
+
+    \subsubsection{Nova Scheduler}
+
+    A Nova Scheduler felelős a VM-ek elhelyezéséért a megfelelő compute node-okon:
+
+    \begin{itemize}
+        \item \textbf{Szűrők:} Kizárják a nem megfelelő hostokat (pl. elégtelen erőforrások miatt)
+        \item \textbf{Súlyozás:} A megfelelő hostok rangsorolása különböző szempontok alapján
+        \item \textbf{Ütemezési stratégiák:}
+        \begin{itemize}
+            \item FilterScheduler: Alapértelmezett, szűrőkön és súlyozáson alapul
+            \item ChanceScheduler: Véletlenszerű választás a megfelelő hostok közül
+        \end{itemize}
+    \end{itemize}
+
+    \subsubsection{Erőforrás-kezelés}
+
+    Nova különböző mechanizmusokat használ az erőforrások hatékony kezelésére:
+
+    \begin{itemize}
+        \item \textbf{Overcommit:} Több erőforrás allokálása, mint ami fizikailag rendelkezésre áll
+        \begin{itemize}
+            \item CPU overcommit: Több vCPU, mint fizikai CPU mag
+            \item Memory overcommit: Több RAM allokálása, mint a fizikai memória
+        \end{itemize}
+
+        \item \textbf{Resource tracking:} Compute node-ok elérhető erőforrásainak nyomon követése
+
+        \item \textbf{Quotas:} Erőforrás-korlátok beállítása projektenként vagy felhasználónként
+    \end{itemize}
+
+    \subsection{Virtuális gépek hálózatkezelése}
+
+    Nova együttműködik a Neutron szolgáltatással a VM-ek hálózati konfigurációjához:
+
+    \begin{itemize}
+        \item \textbf{Hálózati interfészek:} Virtuális hálózati kártyák hozzárendelése a VM-ekhez
+        \item \textbf{Security groups:} Tűzfalszabályok alkalmazása a VM-ekre
+        \item \textbf{Floating IP:} Publikus IP-címek dinamikus hozzárendelése a VM-ekhez
+    \end{itemize}
+
+    \subsection{Virtuális gépek tároláskezelése}
+
+    Nova együttműködik a Cinder szolgáltatással a VM-ek tárolásának kezeléséhez:
+
+    \begin{itemize}
+        \item \textbf{Root disk:} A VM operációs rendszerét és alapszoftvereit tartalmazó lemez
+        \item \textbf{Ephemeral disk:} Ideiglenes tárhely, amely törlődik a VM megszűnésekor
+        \item \textbf{Volume:} Perzisztens blokkeszköz, amely Cinder-en keresztül csatolható a VM-hez
+        \item \textbf{Snapshot:} VM lemezállapotának mentése adott időpillanatban
+    \end{itemize}
+
+    \subsection{Magas rendelkezésre állás és skálázhatóság}
+
+    Nova és Glance támogatják a magas rendelkezésre állást és skálázhatóságot:
+
+    \begin{itemize}
+        \item \textbf{Nova:}
+        \begin{itemize}
+            \item Szolgáltatások elosztása több node-ra
+            \item Automatikus VM újraindítás host hiba esetén
+            \item Live migration: VM-ek áthelyezése leállás nélkül
+        \end{itemize}
+
+        \item \textbf{Glance:}
+        \begin{itemize}
+            \item Képfájlok replikálása több tárolóhelyre
+            \item Terheléselosztás több API szerver között
+        \end{itemize}
+    \end{itemize}
+
+    \newpage
+
+
+    \section{OpenStack Neutron: hálózati jellemzők, alapkoncepciók és mechanizmusok}
+
+    \subsection{Neutron bevezetés és áttekintés}
+
+    Neutron az OpenStack hálózati szolgáltatása, amely lehetővé teszi a komplex virtuális hálózati topológiák létrehozását és kezelését a felhő környezetben\footnote{Forrás: cloud.pdf, 72-76. dia}.
+
+    \subsubsection{Neutron fő funkciói}
+
+    \begin{itemize}
+        \item Virtuális hálózatok és alhálózatok létrehozása és kezelése
+        \item IP-címkezelés (DHCP szolgáltatás)
+        \item Virtuális routerek konfigurálása
+        \item Biztonsági csoportok és hálózati hozzáférési listák (ACL-ek) kezelése
+        \item Terheléselosztás szolgáltatás
+        \item VPN szolgáltatás
+        \item Tűzfal mint szolgáltatás (FWaaS)
+    \end{itemize}
+
+    \subsubsection{Neutron előnyei}
+
+    \begin{itemize}
+        \item \textbf{Rugalmasság:} Komplex hálózati topológiák létrehozása és módosítása igény szerint
+        \item \textbf{Skálázhatóság:} Nagy számú hálózati erőforrás kezelése
+        \item \textbf{Multi-tenancy:} Izolált hálózati környezetek biztosítása különböző projekteknek
+        \item \textbf{Pluggable architektúra:} Különböző hálózati technológiák és gyártók támogatása
+        \item \textbf{API-vezérelt:} Programozható hálózatkezelés, automatizálási lehetőségek
+    \end{itemize}
+
+    \subsection{Neutron alapkoncepciók}
+
+    \subsubsection{Hálózat (Network)}
+
+    \begin{itemize}
+        \item L2 szintű izolált szegmens az OpenStack környezetben
+        \item Lehet privát (projekt-specifikus) vagy megosztott (több projekt között)
+        \item Típusok: flat, VLAN, VXLAN, GRE
+    \end{itemize}
+
+    \subsubsection{Alhálózat (Subnet)}
+
+    \begin{itemize}
+        \item IP címtartomány egy adott hálózaton belül
+        \item Meghatározza az IP-címkiosztás módját (DHCP vagy statikus)
+        \item Tartalmazza az alapértelmezett átjáró és DNS szerverek beállításait
+    \end{itemize}
+
+    \subsubsection{Port}
+
+    \begin{itemize}
+        \item Hálózati csatlakozási pont egy virtuális hálózaton
+        \item Minden porthoz tartozik egy MAC cím és egy vagy több IP cím
+        \item Virtuális gépek, routerek és load balancerek csatlakoznak portokhoz
+    \end{itemize}
+
+    \subsubsection{Router}
+
+    \begin{itemize}
+        \item L3 szintű útválasztást biztosít különböző hálózatok között
+        \item Lehetővé teszi a kommunikációt különböző alhálózatok és külső hálózatok között
+        \item Támogatja a statikus és dinamikus útválasztást
+    \end{itemize}
+
+    \subsubsection{Floating IP}
+
+    \begin{itemize}
+        \item Publikus IP cím, amely dinamikusan hozzárendelhető egy privát IP címhez
+        \item Lehetővé teszi a külső hozzáférést a privát hálózaton lévő erőforrásokhoz
+    \end{itemize}
+
+    \subsubsection{Biztonsági csoport (Security Group)}
+
+    \begin{itemize}
+        \item Tűzfalszabályok csoportja, amely meghatározza a bejövő és kimenő forgalmat
+        \item Portszintű szabályok alkalmazása a virtuális gépekre
+    \end{itemize}
+
+    \subsubsection{Szolgáltatói hálózat (Provider Network)}
+
+    \begin{itemize}
+        \item Adminisztrátorok által létrehozott hálózat, amely közvetlenül kapcsolódik a fizikai infrastruktúrához
+        \item Általában külső hozzáférést biztosít a virtuális gépekhez
+    \end{itemize}
+
+    \subsection{Neutron architektúra és komponensek}
+
+    Neutron egy elosztott architektúrát használ, amely több komponensből áll, lehetővé téve a rugalmas és skálázható hálózatkezelést.
+
+    \subsubsection{Neutron Server}
+
+    \begin{itemize}
+        \item Központi komponens, amely fogadja és feldolgozza az API kéréseket
+        \item Kommunikál az adatbázissal a hálózati konfiguráció tárolásához
+        \item Üzenetsorokat használ a különböző ágensekkel való kommunikációhoz
+    \end{itemize}
+
+    \subsubsection{Plugin-ok}
+
+    Neutron pluggable architektúrát használ, amely lehetővé teszi különböző hálózati technológiák integrálását:
+
+    \begin{itemize}
+        \item \textbf{Core plugin:} L2 hálózati funkcionalitást biztosít (pl. Open vSwitch, Linux Bridge)
+        \item \textbf{Service plugin-ok:} Kiterjesztett szolgáltatásokat nyújtanak (pl. L3 routing, load balancing, VPN)
+    \end{itemize}
+
+    \subsubsection{Ágensek}
+
+    Az ágensek felelősek a hálózati konfigurációk végrehajtásáért a hálózati node-okon és a compute node-okon:
+
+    \begin{itemize}
+        \item \textbf{L2 agent:} Virtuális switch-ek és VLAN-ok konfigurálása (pl. Open vSwitch agent, Linux Bridge agent)
+        \item \textbf{L3 agent:} Virtuális routerek és floating IP-k kezelése
+        \item \textbf{DHCP agent:} DHCP szolgáltatás biztosítása az alhálózatoknak
+        \item \textbf{Metadata agent:} Metaadat szolgáltatás biztosítása a virtuális gépeknek
+    \end{itemize}
+
+    \subsubsection{Hálózati node}
+
+    Speciális node, amely a következő komponenseket futtatja:
+
+    \begin{itemize}
+        \item L3 agent (virtuális routerek)
+        \item DHCP agent
+        \item Egyéb szolgáltatás plugin-ok (pl. load balancer, VPN)
+    \end{itemize}
+
+    \subsubsection{Compute node}
+
+    A virtuális gépeket futtató node-ok, amelyek a következő Neutron komponenseket tartalmazzák:
+
+    \begin{itemize}
+        \item L2 agent (virtuális switch-ek kezelése)
+        \item Security group agent (tűzfalszabályok érvényesítése)
+    \end{itemize}
+
+    \subsubsection{Neutron adatbázis}
+
+    \begin{itemize}
+        \item Tárolja a hálózati konfigurációkat és állapotinformációkat
+        \item Általában MySQL vagy PostgreSQL adatbázis
+    \end{itemize}
+
+    \subsubsection{Üzenetsor (Message Queue)}
+
+    \begin{itemize}
+        \item RPC (Remote Procedure Call) kommunikációt biztosít a komponensek között
+        \item Általában RabbitMQ-t használnak
+    \end{itemize}
+
+    \subsection{Hálózati szolgáltatások és funkciók}
+
+    \subsubsection{L2 hálózatkezelés}
+
+    \begin{itemize}
+        \item Virtuális switch-ek konfigurálása (Open vSwitch vagy Linux Bridge)
+        \item VLAN, VXLAN, GRE alagutazás támogatása
+        \item Port binding és security
+    \end{itemize}
+
+    \subsubsection{L3 routing}
+
+    \begin{itemize}
+        \item Virtuális routerek létrehozása és konfigurálása
+        \item Alhálózatok közötti forgalom irányítása
+        \item NAT (Network Address Translation) kezelése
+        \item Floating IP-k támogatása
+    \end{itemize}
+
+    \subsubsection{DHCP szolgáltatás}
+
+    \begin{itemize}
+        \item Automatikus IP-címkiosztás az alhálózatokon belül
+        \item DNS és alapértelmezett átjáró információk biztosítása
+    \end{itemize}
+
+    \subsubsection{Biztonsági csoportok}
+
+    \begin{itemize}
+        \item Stateful tűzfalszabályok alkalmazása port szinten
+        \item Bejövő és kimenő forgalom szabályozása
+    \end{itemize}
+
+    \subsubsection{Load Balancing as a Service (LBaaS)}
+
+    \begin{itemize}
+        \item Terheléselosztás több virtuális gép között
+        \item Támogatja a TCP, HTTP és HTTPS protokollokat
+        \item Egészségügyi ellenőrzések és session persistence
+    \end{itemize}
+
+    \subsubsection{VPN as a Service (VPNaaS)}
+
+    \begin{itemize}
+        \item Site-to-site VPN kapcsolatok létrehozása
+        \item IPsec protokoll támogatása
+    \end{itemize}
+
+    \subsubsection{Firewall as a Service (FWaaS)}
+
+    \begin{itemize}
+        \item Központosított tűzfalszolgáltatás
+        \item Szabályok alkalmazása router szinten
+    \end{itemize}
+
+    \subsubsection{Quality of Service (QoS)}
+
+    \begin{itemize}
+        \item Sávszélesség-korlátozás és -garantálás
+        \item DSCP (Differentiated Services Code Point) jelölés támogatása
+    \end{itemize}
+
+    \subsection{Hálózati topológiák és konfigurációk}
+
+    Neutron rugalmasan támogat különböző hálózati topológiákat, amelyek megfelelnek a különböző használati eseteknek és biztonsági követelményeknek.
+
+    \subsubsection{Alap hálózati topológiák}
+
+    \begin{itemize}
+        \item \textbf{Egyszerű flat hálózat:}
+        \begin{itemize}
+            \item Minden VM ugyanazon a L2 hálózaton van
+            \item Nincs hálózati szegmentáció vagy izoláció
+            \item Korlátozott skálázhatóság és biztonság
+        \end{itemize}
+
+        \item \textbf{Provider hálózat:}
+        \begin{itemize}
+            \item Adminisztrátor által definiált, közvetlenül a fizikai hálózathoz kapcsolódó hálózat
+            \item VM-ek közvetlen hozzáférése a külső hálózathoz
+            \item Korlátozott hálózati szolgáltatások (pl. nincs routing)
+        \end{itemize}
+
+        \item \textbf{Self-service hálózatok:}
+        \begin{itemize}
+            \item Felhasználók által létrehozott privát hálózatok
+            \item Teljes izoláció projektek között
+            \item Virtuális routerek a különböző hálózatok összekapcsolásához
+        \end{itemize}
+    \end{itemize}
+
+    \subsubsection{Összetett hálózati topológiák}
+
+    \begin{itemize}
+        \item \textbf{Multi-tier alkalmazás architektúra:}
+        \begin{itemize}
+            \item Különböző rétegek (web, alkalmazás, adatbázis) külön hálózatokon
+            \item Biztonsági csoportok a rétegek közötti forgalom szabályozására
+        \end{itemize}
+
+        \item \textbf{Hibrid felhő konfiguráció:}
+        \begin{itemize}
+            \item OpenStack privát felhő összekapcsolása publikus felhővel
+            \item VPN vagy dedikált kapcsolat használata
+        \end{itemize}
+
+        \item \textbf{Elosztott alkalmazások:}
+        \begin{itemize}
+            \item Több adatközpont vagy régió összekapcsolása
+            \item BGP (Border Gateway Protocol) használata a hálózatok között
+        \end{itemize}
+    \end{itemize}
+
+    \subsubsection{Hálózati szegmentációs technikák}
+
+    \begin{itemize}
+        \item \textbf{VLAN:}
+        \begin{itemize}
+            \item Hagyományos L2 szegmentáció
+            \item Korlátozott skálázhatóság (4096 VLAN ID)
+        \end{itemize}
+
+        \item \textbf{VXLAN (Virtual Extensible LAN):}
+        \begin{itemize}
+            \item L2 over L3 alagutazás
+            \item Nagy skálázhatóság (16 millió hálózati azonosító)
+        \end{itemize}
+
+        \item \textbf{GRE (Generic Routing Encapsulation):}
+        \begin{itemize}
+            \item IP-alapú alagutazási protokoll
+            \item Jó kompatibilitás különböző hálózati eszközökkel
+        \end{itemize}
+    \end{itemize}
+
+    \subsection{Biztonsági mechanizmusok}
+
+    Neutron több beépített biztonsági mechanizmust kínál a hálózati biztonság növelésére.
+
+    \subsubsection{Biztonsági csoportok}
+
+    \begin{itemize}
+        \item Portszintű, stateful tűzfalszabályok
+        \item Alapértelmezetten minden bejövő forgalom tiltva, kimenő engedélyezve
+        \item Szabályok definiálhatók IP címekre, portokra és protokollokra
+    \end{itemize}
+
+    \subsubsection{Hozzáférés-vezérlési listák (ACL)}
+
+    \begin{itemize}
+        \item Finomhangolt forgalomszabályozás hálózati szinten
+        \item Stateless szabályok, amelyek kiegészítik a biztonsági csoportokat
+    \end{itemize}
+
+    \subsubsection{Port security}
+
+    \begin{itemize}
+        \item MAC spoofing és IP spoofing elleni védelem
+        \item MAC és IP címek rögzítése egy porton
+    \end{itemize}
+
+    \subsubsection{Allowed address pairs}
+
+    \begin{itemize}
+        \item Kivételek definiálása a port security szabályok alól
+        \item Hasznos speciális esetekben (pl. magas rendelkezésre állású konfigurációk)
+    \end{itemize}
+
+    \subsubsection{DHCP spoofing védelem}
+
+    \begin{itemize}
+        \item Csak a Neutron DHCP szerverek válaszai engedélyezettek
+        \item Megakadályozza a nem kívánt DHCP szerverek működését
+    \end{itemize}
+
+    \subsubsection{ARP spoofing védelem}
+
+    \begin{itemize}
+        \item Az ARP válaszok szűrése a rögzített MAC és IP címek alapján
+        \item Megakadályozza a rosszindulatú ARP cache mérgezést
+    \end{itemize}
+
+    \subsubsection{Isolated metadata proxy szolgáltatás}
+
+    \begin{itemize}
+        \item Biztonságos metaadat hozzáférés a virtuális gépek számára
+        \item Megakadályozza a VM-ek közötti metaadat szivárgást
+    \end{itemize}
+
+    \subsection{Integrációk más OpenStack szolgáltatásokkal}
+
+    Neutron szorosan együttműködik más OpenStack komponensekkel a hálózatkezelés során.
+
+    \subsubsection{Nova integrációk}
+
+    \begin{itemize}
+        \item Automatikus port létrehozás és csatolás VM indításkor
+        \item Hálózati információk biztosítása a VM-ek számára
+        \item Biztonsági csoport szabályok érvényesítése
+    \end{itemize}
+
+    \subsubsection{Keystone integrációk}
+
+    \begin{itemize}
+        \item Felhasználói hitelesítés és jogosultságkezelés
+        \item RBAC (Role-Based Access Control) a hálózati erőforrásokhoz
+    \end{itemize}
+
+    \subsubsection{Horizon integrációk}
+
+    \begin{itemize}
+        \item Grafikus felület a hálózatok és biztonsági beállítások kezeléséhez
+        \item Hálózati topológia vizualizáció
+    \end{itemize}
+
+    \subsubsection{Cinder integrációk}
+
+    \begin{itemize}
+        \item Hálózati csatlakozás biztosítása a blokkeszközökhöz
+        \item Többutas (multipath) I/O támogatás
+    \end{itemize}
+
+    \newpage
+
+
+    \section{OpenStack Cinder és Swift: tárolási jellemzők, alapkoncepciók és mechanizmusok}
+
+    \subsection{Bevezetés a Cinder és Swift szolgáltatásokhoz}
+
+    Az OpenStack két fő tárolási szolgáltatást kínál: Cinder a blokkszintű tároláshoz és Swift az objektum alapú tároláshoz. Mindkét szolgáltatás kulcsfontosságú szerepet játszik a felhő alapú tárolási igények kielégítésében, de különböző használati esetekre optimalizáltak.
+
+    \subsubsection{Cinder áttekintés}
+
+    Cinder az OpenStack blokkszintű tárolószolgáltatása\footnote{Forrás: cloud.pdf, 77-83. dia}.
+
+    \begin{itemize}
+        \item Perzisztens tárolóeszközöket (köteteket) biztosít virtuális gépek számára
+        \item Hasonló a hagyományos SAN (Storage Area Network) vagy NAS (Network Attached Storage) rendszerekhez
+        \item Támogatja a különböző tárolási backend-eket (pl. LVM, Ceph, NFS)
+    \end{itemize}
+
+    \subsubsection{Swift áttekintés}
+
+    Swift az OpenStack objektum alapú tárolószolgáltatása\footnote{Forrás: cloud.pdf, 84-89. dia}.
+
+    \begin{itemize}
+        \item Nagyméretű, skálázható adattárolást biztosít
+        \item RESTful API-n keresztül érhető el
+        \item Alkalmas nagy mennyiségű strukturálatlan adat tárolására (pl. képek, videók, backupok)
+        \item Beépített redundancia és magas rendelkezésre állás
+    \end{itemize}
+
+    \subsection{Cinder: Blokkszintű tárolás}
+
+    \subsubsection{Cinder alapkoncepciók}
+
+    \begin{itemize}
+        \item \textbf{Kötet (Volume):} Blokkeszköz, amely csatolható virtuális gépekhez
+        \item \textbf{Pillanatkép (Snapshot):} Kötet adott időpillanatbeli állapotának mentése
+        \item \textbf{Backup:} Kötet biztonsági mentése, tárolható külső rendszerben is
+        \item \textbf{Kötetcsoport (Volume Group):} Logikailag összetartozó kötetek csoportja
+        \item \textbf{QoS (Quality of Service):} Teljesítmény-szabályozás kötetekre vagy csoportokra
+    \end{itemize}
+
+    \subsubsection{Cinder architektúra}
+
+    \begin{itemize}
+        \item \textbf{cinder-api:} RESTful API-t biztosít a kérések fogadására
+        \item \textbf{cinder-scheduler:} Meghatározza, melyik tárolónode-on jöjjön létre egy új kötet
+        \item \textbf{cinder-volume:} Kezeli a köteteket a tárolóbackend-eken
+        \item \textbf{cinder-backup:} Kötetek biztonsági mentését és visszaállítását végzi
+    \end{itemize}
+
+    \subsubsection{Cinder működési mechanizmusok}
+
+    \begin{enumerate}
+        \item \textbf{Kötet létrehozása:}
+        \begin{itemize}
+            \item Felhasználó kérést küld az API-n keresztül
+            \item Scheduler kiválasztja a megfelelő tárolónode-ot
+            \item Cinder-volume létrehozza a kötetet a kiválasztott backend-en
+        \end{itemize}
+
+        \item \textbf{Kötet csatolása VM-hez:}
+        \begin{itemize}
+            \item Nova kéri a kötet csatolását
+            \item Cinder előkészíti a kötetet (pl. iSCSI kapcsolat beállítása)
+            \item Nova csatolja a kötetet a VM-hez
+        \end{itemize}
+
+        \item \textbf{Pillanatkép készítése:}
+        \begin{itemize}
+            \item Felhasználó kéri a pillanatkép készítését
+            \item Cinder-volume létrehozza a pillanatképet a tárolóbackend-en
+            \item Metaadatok tárolása az adatbázisban
+        \end{itemize}
+
+        \item \textbf{Kötet klónozása:}
+        \begin{itemize}
+            \item Új kötet létrehozása egy meglévő kötet vagy pillanatkép alapján
+            \item Hatékony másolási technikák használata (pl. copy-on-write)
+        \end{itemize}
+    \end{enumerate}
+
+    \subsubsection{Cinder tárolási backend-ek}
+
+    Cinder támogatja a különböző tárolási technológiákat pluggable driver architektúrán keresztül:
+
+    \begin{itemize}
+        \item \textbf{LVM (Logical Volume Manager):} Alapértelmezett backend
+        \item \textbf{Ceph RBD:} Elosztott tárolórendszer
+        \item \textbf{NFS:} Hálózati fájlrendszer alapú tárolás
+        \item \textbf{iSCSI:} Blokkszintű tárolás IP hálózaton keresztül
+        \item \textbf{Gyártóspecifikus driverek:} pl. EMC, NetApp, HP, IBM storage rendszerekhez
+    \end{itemize}
+
+    \subsection{Swift: Objektum alapú tárolás}
+
+    \subsubsection{Swift alapkoncepciók}
+
+    \begin{itemize}
+        \item \textbf{Objektum (Object):} Adategység, amely tartalmazza magát az adatot és a hozzá tartozó metaadatokat
+        \item \textbf{Konténer (Container):} Objektumok logikai csoportosítása
+        \item \textbf{Fiók (Account):} Konténerek gyűjteménye, általában egy projekthez vagy felhasználóhoz tartozik
+        \item \textbf{Partíció:} Az adatok elosztásának alapegysége a Swift klaszterben
+        \item \textbf{Régió:} Földrajzilag elkülönült Swift telepítés
+    \end{itemize}
+
+    \subsubsection{Swift architektúra}
+
+    Swift elosztott architektúrát használ a skálázhatóság és a magas rendelkezésre állás érdekében:
+
+    \begin{itemize}
+        \item \textbf{Proxy szerver:}
+        \begin{itemize}
+            \item Fogadja és irányítja a kéréseket
+            \item Load balancing és hibakezelés
+        \end{itemize}
+
+        \item \textbf{Fiók szerver:} Kezeli a fiókokhoz tartozó metaadatokat
+        \item \textbf{Konténer szerver:} Kezeli a konténerekhez tartozó metaadatokat
+        \item \textbf{Objektum szerver:} Tárolja és kezeli az objektumokat
+        \item \textbf{Ring:} Elosztott adatbázis, amely nyilvántartja az adatok fizikai helyét
+    \end{itemize}
+
+    \subsubsection{Swift működési mechanizmusok}
+
+    \begin{enumerate}
+        \item \textbf{Objektum feltöltése:}
+        \begin{itemize}
+            \item Kliens kérést küld a proxy szervernek
+            \item Proxy meghatározza az objektum helyét a ring segítségével
+            \item Objektum párhuzamos feltöltése több replikára
+            \item Sikeres feltöltés után a metaadatok frissítése
+        \end{itemize}
+
+        \item \textbf{Objektum letöltése:}
+        \begin{itemize}
+            \item Kliens kérést küld a proxy szervernek
+            \item Proxy lekérdezi az objektum helyét a ringből
+            \item Objektum letöltése az elérhető replikák egyikéről
+        \end{itemize}
+
+        \item \textbf{Adatreplikáció:}
+        \begin{itemize}
+            \item Folyamatos háttérfolyamat a replikák szinkronizálására
+            \item Hibás vagy elérhetetlenné vált adatok automatikus helyreállítása
+        \end{itemize}
+
+        \item \textbf{Konzisztencia kezelés:}
+        \begin{itemize}
+            \item Eventual consistency modell
+            \item Verziókezelés a konfliktusok feloldására
+        \end{itemize}
+    \end{enumerate}
+
+    \subsubsection{Swift biztonsági mechanizmusok}
+
+    \begin{itemize}
+        \item \textbf{Hozzáférés-vezérlés:}
+        \begin{itemize}
+            \item ACL-ek (Access Control Lists) fiók, konténer és objektum szinten
+            \item Ideiglenes URL-ek korlátozott hozzáféréshez
+        \end{itemize}
+
+        \item \textbf{Adattitkosítás:}
+        \begin{itemize}
+            \item Támogatja az at-rest titkosítást
+            \item SSL/TLS az adatátvitel során
+        \end{itemize}
+
+        \item \textbf{Adatintegritás:}
+        \begin{itemize}
+            \item MD5 ellenőrzőösszegek az objektumokhoz
+            \item Rendszeres integritás-ellenőrzések
+        \end{itemize}
+    \end{itemize}
+
+    \subsubsection{Swift skálázhatóság és teljesítmény}
+
+    \begin{itemize}
+        \item \textbf{Horizontális skálázás:} Új node-ok hozzáadásával növelhető a kapacitás és teljesítmény
+        \item \textbf{Partícionálás:} Adatok egyenletes elosztása a klaszterben
+        \item \textbf{Gyorsítótárazás:} Proxy szerverek gyorsítótárazása a gyakran használt objektumokhoz
+        \item \textbf{Párhuzamos műveletek:} Több objektumszerver párhuzamos használata a műveletek során
+    \end{itemize}
+
+    \subsection{Cinder és Swift összehasonlítása}
+
+    \begin{tabular}{|p{0.2\textwidth}|p{0.35\textwidth}|p{0.35\textwidth}|}
+        \hline
+        \textbf{Jellemző} & \textbf{Cinder}                        & \textbf{Swift}                       \\
+        \hline
+        Tárolási modell   & Blokkszintű                            & Objektum alapú                       \\
+        \hline
+        Használati eset   & VM-ek perzisztens tárolása             & Nagy mennyiségű strukturálatlan adat \\
+        \hline
+        Hozzáférés        & iSCSI, Fibre Channel, stb.             & HTTP RESTful API                     \\
+        \hline
+        Skálázhatóság     & Vertikális és korlátozott horizontális & Korlátlan horizontális               \\
+        \hline
+        Konzisztencia     & Erős konzisztencia                     & Eventual consistency                 \\
+        \hline
+        Teljesítmény      & Magas I/O teljesítmény                 & Nagy áteresztőképesség               \\
+        \hline
+        Redundancia       & Backend-függő                          & Beépített, több replika              \\
+        \hline
+        Használat         & Adatbázisok, alkalmazás-fájlrendszerek & Backupok, archívumok, médiatartalmak \\
+        \hline
+    \end{tabular}
+
+    \subsection{Integrációk más OpenStack szolgáltatásokkal}
+
+    \subsubsection{Cinder integrációk}
+
+    \begin{itemize}
+        \item \textbf{Nova:} VM-ek számára perzisztens tárolás biztosítása
+        \item \textbf{Glance:} Képfájlok tárolása Cinder köteteken
+        \item \textbf{Horizon:} Grafikus felület a kötetek kezeléséhez
+        \item \textbf{Keystone:} Hitelesítés és jogosultságkezelés
+    \end{itemize}
+
+    \subsubsection{Swift integrációk}
+
+    \begin{itemize}
+        \item \textbf{Glance:} Képfájlok tárolása Swift konténerekben
+        \item \textbf{Cinder:} Kötetek biztonsági mentése Swift-be
+        \item \textbf{Horizon:} Webes felület az objektumok kezeléséhez
+        \item \textbf{Keystone:} Hitelesítés és jogosultságkezelés
+        \item \textbf{Heat:} Objektumok használata telepítési sablonokban
+    \end{itemize}
+
+    \newpage
+
+
+    \section{AWS IaaS megoldások: EC2 és tárolási szolgáltatások}
+
+    \subsection{Bevezetés az AWS IaaS megoldásokba}
+
+    Az Amazon Web Services (AWS) az egyik vezető felhőszolgáltató, amely széles körű infrastruktúra mint szolgáltatás (IaaS) megoldásokat kínál\footnote{Forrás: cloud.pdf, 178-182. dia}.
+
+    \subsubsection{AWS IaaS főbb jellemzői}
+
+    \begin{itemize}
+        \item Skálázhatóság: Erőforrások gyors növelése vagy csökkentése igény szerint
+        \item Rugalmasság: Széles választék a számítási és tárolási erőforrásokból
+        \item Globális jelenlét: Több régió és rendelkezésre állási zóna világszerte
+        \item Pay-as-you-go árazás: Csak a ténylegesen használt erőforrásokért kell fizetni
+        \item Magas rendelkezésre állás: Redundáns infrastruktúra és automatikus hibakezelés
+    \end{itemize}
+
+    \subsection{Amazon EC2 (Elastic Compute Cloud)}
+
+    Az EC2 az AWS alapvető számítási szolgáltatása, amely virtuális szerverek (instances) létrehozását és kezelését teszi lehetővé\footnote{Forrás: cloud.pdf, 183-185. dia}.
+
+    \subsubsection{EC2 alapkoncepciók}
+
+    \begin{itemize}
+        \item \textbf{Instance:} Virtuális szerver az EC2-ben
+        \item \textbf{Amazon Machine Image (AMI):} Előre konfigurált szoftvercsomag (OS, alkalmazások)
+        \item \textbf{Instance type:} Az instance hardverkonfigurációja (CPU, memória, tárhely)
+        \item \textbf{Key pair:} Biztonságos bejelentkezéshez használt kulcspár
+        \item \textbf{Security group:} Virtuális tűzfal az instance-ok védelmére
+        \item \textbf{Elastic IP:} Statikus, újrahozzárendelhető publikus IP-cím
+    \end{itemize}
+
+    \subsubsection{EC2 instance típusok}
+
+    EC2 különböző instance típusokat kínál, optimalizálva különböző használati esetekre:
+
+    \begin{itemize}
+        \item General Purpose (pl. t3, m5): Kiegyensúlyozott CPU és memória
+        \item Compute Optimized (pl. c5): Magas teljesítményű számításokhoz
+        \item Memory Optimized (pl. r5): Nagy memóriaigényű alkalmazásokhoz
+        \item Storage Optimized (pl. i3, d2): Magas I/O teljesítményhez
+        \item GPU Instances (pl. p3, g4): Grafikus és GPGPU számításokhoz
+    \end{itemize}
+
+    \subsection{AWS tárolási szolgáltatások}
+
+    AWS több tárolási megoldást kínál az EC2 instance-ok számára\footnote{Forrás: cloud.pdf, 186-190. dia}.
+
+    \subsubsection{Amazon Elastic Block Store (EBS)}
+
+    \begin{itemize}
+        \item Blokkszintű tárolás EC2 instance-ok számára
+        \item Perzisztens tárolás, független az instance életciklusától
+        \item Különböző típusok: General Purpose SSD, Provisioned IOPS SSD, Throughput Optimized HDD, Cold HDD
+        \item Pillanatképek (snapshots) készítésének lehetősége
+    \end{itemize}
+
+    \subsubsection{Amazon S3 (Simple Storage Service)}
+
+    \begin{itemize}
+        \item Objektum alapú tárolás
+        \item Korlátlan mennyiségű adat tárolása
+        \item Magas rendelkezésre állás és tartósság
+        \item Webes hozzáférés RESTful API-n keresztül
+    \end{itemize}
+
+    \subsubsection{Instance Store}
+
+    \begin{itemize}
+        \item Ideiglenes blokk-szintű tároló az EC2 instance-hoz csatolva
+        \item Nagy I/O teljesítmény
+        \item Az adatok elvesznek az instance leállításakor vagy meghibásodásakor
+    \end{itemize}
+
+    \subsection{Virtuális gépek menedzsmentje az AWS-ben}
+
+    \subsubsection{EC2 instance életciklus}
+
+    \begin{enumerate}
+        \item \textbf{Indítás (Launch):}
+        \begin{itemize}
+            \item AMI kiválasztása
+            \item Instance type meghatározása
+            \item Hálózati és biztonsági beállítások konfigurálása
+            \item Tárolás konfigurálása (EBS kötetek csatolása)
+        \end{itemize}
+
+        \item \textbf{Futás (Running):}
+        \begin{itemize}
+            \item Instance aktív és használható
+            \item Erőforráshasználat monitorozása (CloudWatch)
+        \end{itemize}
+
+        \item \textbf{Leállítás (Stop):}
+        \begin{itemize}
+            \item Instance leállítása (csak EBS-backed instance-oknál)
+            \item Nem generál további költséget a számítási erőforrásokért
+        \end{itemize}
+
+        \item \textbf{Újraindítás (Restart):}
+        \begin{itemize}
+            \item Leállított instance újraindítása
+            \item Ugyanazon a fizikai hoston folytatódik
+        \end{itemize}
+
+        \item \textbf{Megszüntetés (Terminate):}
+        \begin{itemize}
+            \item Instance és kapcsolódó erőforrások végleges törlése
+            \item Alapértelmezetten az EBS kötetek is törlődnek
+        \end{itemize}
+    \end{enumerate}
+
+    \subsubsection{Auto Scaling}
+
+    \begin{itemize}
+        \item Automatikus kapacitásbővítés vagy -csökkentés az alkalmazás terhelése alapján
+        \item Komponensek:
+        \begin{itemize}
+            \item Launch Configuration: Instance konfiguráció sablon
+            \item Auto Scaling Group: Instance-ok logikai csoportja
+            \item Scaling Policy: Szabályok a skálázás vezérlésére
+        \end{itemize}
+    \end{itemize}
+
+    \subsubsection{Elastic Load Balancing (ELB)}
+
+    \begin{itemize}
+        \item Bejövő forgalom elosztása több EC2 instance között
+        \item Típusok:
+        \begin{itemize}
+            \item Application Load Balancer (ALB): HTTP/HTTPS forgalomhoz
+            \item Network Load Balancer (NLB): TCP/UDP forgalomhoz
+            \item Classic Load Balancer: Régebbi, általános célú terheléselosztó
+        \end{itemize}
+    \end{itemize}
+
+    \subsection{Biztonság és hálózatkezelés}
+
+    \subsubsection{Amazon Virtual Private Cloud (VPC)}
+
+    \begin{itemize}
+        \item Izolált virtuális hálózat az AWS felhőben
+        \item Teljes kontroll az IP-címtartomány, alhálózatok, routing táblák és hálózati átjárók felett
+        \item Lehetőség a helyi adatközponttal való biztonságos összekapcsolásra (VPN vagy Direct Connect)
+    \end{itemize}
+
+    \subsubsection{Security Groups}
+
+    \begin{itemize}
+        \item Virtuális tűzfal az EC2 instance-ok védelmére
+        \item Szabályok definiálása a bejövő és kimenő forgalomra
+        \item Stateful működés: a bejövő forgalomra adott válasz automatikusan engedélyezett
+    \end{itemize}
+
+    \subsubsection{Identity and Access Management (IAM)}
+
+    \begin{itemize}
+        \item Felhasználók és jogosultságok kezelése
+        \item Részletes hozzáférés-vezérlés az AWS erőforrásokhoz
+        \item Multi-Factor Authentication (MFA) támogatása
+    \end{itemize}
+
+    \subsubsection{AWS CloudTrail}
+
+    \begin{itemize}
+        \item API-hívások naplózása és monitorozása
+        \item Segít a biztonsági elemzésben és hibaelhárításban
+        \item Megfelelőségi ellenőrzések támogatása
+    \end{itemize}
+
+
+    \section{AWS IaaS megoldások: EC2 és tárolási szolgáltatások}
+
+    \subsection{Bevezetés az AWS IaaS megoldásokba}
+
+    Az Amazon Web Services (AWS) az egyik vezető felhőszolgáltató, amely széles körű infrastruktúra mint szolgáltatás (IaaS) megoldásokat kínál\footnote{Forrás: cloud.pdf, 178-182. dia}.
+
+    \subsubsection{AWS IaaS főbb jellemzői}
+
+    \begin{itemize}
+        \item Skálázhatóság: Erőforrások gyors növelése vagy csökkentése igény szerint
+        \item Rugalmasság: Széles választék a számítási és tárolási erőforrásokból
+        \item Globális jelenlét: Több régió és rendelkezésre állási zóna világszerte
+        \item Pay-as-you-go árazás: Csak a ténylegesen használt erőforrásokért kell fizetni
+        \item Magas rendelkezésre állás: Redundáns infrastruktúra és automatikus hibakezelés
+    \end{itemize}
+
+    \subsection{Amazon EC2 (Elastic Compute Cloud)}
+
+    Az EC2 az AWS alapvető számítási szolgáltatása, amely virtuális szerverek (instances) létrehozását és kezelését teszi lehetővé\footnote{Forrás: cloud.pdf, 183-185. dia}.
+
+    \subsubsection{EC2 alapkoncepciók}
+
+    \begin{itemize}
+        \item \textbf{Instance:} Virtuális szerver az EC2-ben
+        \item \textbf{Amazon Machine Image (AMI):} Előre konfigurált szoftvercsomag (OS, alkalmazások)
+        \item \textbf{Instance type:} Az instance hardverkonfigurációja (CPU, memória, tárhely)
+        \item \textbf{Key pair:} Biztonságos bejelentkezéshez használt kulcspár
+        \item \textbf{Security group:} Virtuális tűzfal az instance-ok védelmére
+        \item \textbf{Elastic IP:} Statikus, újrahozzárendelhető publikus IP-cím
+    \end{itemize}
+
+    \subsubsection{EC2 instance típusok}
+
+    EC2 különböző instance típusokat kínál, optimalizálva különböző használati esetekre:
+
+    \begin{itemize}
+        \item General Purpose (pl. t3, m5): Kiegyensúlyozott CPU és memória
+        \item Compute Optimized (pl. c5): Magas teljesítményű számításokhoz
+        \item Memory Optimized (pl. r5): Nagy memóriaigényű alkalmazásokhoz
+        \item Storage Optimized (pl. i3, d2): Magas I/O teljesítményhez
+        \item GPU Instances (pl. p3, g4): Grafikus és GPGPU számításokhoz
+    \end{itemize}
+
+    \subsection{AWS tárolási szolgáltatások}
+
+    AWS több tárolási megoldást kínál az EC2 instance-ok számára\footnote{Forrás: cloud.pdf, 186-190. dia}.
+
+    \subsubsection{Amazon Elastic Block Store (EBS)}
+
+    \begin{itemize}
+        \item Blokkszintű tárolás EC2 instance-ok számára
+        \item Perzisztens tárolás, független az instance életciklusától
+        \item Különböző típusok: General Purpose SSD, Provisioned IOPS SSD, Throughput Optimized HDD, Cold HDD
+        \item Pillanatképek (snapshots) készítésének lehetősége
+    \end{itemize}
+
+    \subsubsection{Amazon S3 (Simple Storage Service)}
+
+    \begin{itemize}
+        \item Objektum alapú tárolás
+        \item Korlátlan mennyiségű adat tárolása
+        \item Magas rendelkezésre állás és tartósság
+        \item Webes hozzáférés RESTful API-n keresztül
+    \end{itemize}
+
+    \subsubsection{Instance Store}
+
+    \begin{itemize}
+        \item Ideiglenes blokk-szintű tároló az EC2 instance-hoz csatolva
+        \item Nagy I/O teljesítmény
+        \item Az adatok elvesznek az instance leállításakor vagy meghibásodásakor
+    \end{itemize}
+
+    \subsection{Virtuális gépek menedzsmentje az AWS-ben}
+
+    \subsubsection{EC2 instance életciklus}
+
+    \begin{enumerate}
+        \item \textbf{Indítás (Launch):}
+        \begin{itemize}
+            \item AMI kiválasztása
+            \item Instance type meghatározása
+            \item Hálózati és biztonsági beállítások konfigurálása
+            \item Tárolás konfigurálása (EBS kötetek csatolása)
+        \end{itemize}
+
+        \item \textbf{Futás (Running):}
+        \begin{itemize}
+            \item Instance aktív és használható
+            \item Erőforráshasználat monitorozása (CloudWatch)
+        \end{itemize}
+
+        \item \textbf{Leállítás (Stop):}
+        \begin{itemize}
+            \item Instance leállítása (csak EBS-backed instance-oknál)
+            \item Nem generál további költséget a számítási erőforrásokért
+        \end{itemize}
+
+        \item \textbf{Újraindítás (Restart):}
+        \begin{itemize}
+            \item Leállított instance újraindítása
+            \item Ugyanazon a fizikai hoston folytatódik
+        \end{itemize}
+
+        \item \textbf{Megszüntetés (Terminate):}
+        \begin{itemize}
+            \item Instance és kapcsolódó erőforrások végleges törlése
+            \item Alapértelmezetten az EBS kötetek is törlődnek
+        \end{itemize}
+    \end{enumerate}
+
+    \subsubsection{Auto Scaling}
+
+    \begin{itemize}
+        \item Automatikus kapacitásbővítés vagy -csökkentés az alkalmazás terhelése alapján
+        \item Komponensek:
+        \begin{itemize}
+            \item Launch Configuration: Instance konfiguráció sablon
+            \item Auto Scaling Group: Instance-ok logikai csoportja
+            \item Scaling Policy: Szabályok a skálázás vezérlésére
+        \end{itemize}
+    \end{itemize}
+
+    \subsubsection{Elastic Load Balancing (ELB)}
+
+    \begin{itemize}
+        \item Bejövő forgalom elosztása több EC2 instance között
+        \item Típusok:
+        \begin{itemize}
+            \item Application Load Balancer (ALB): HTTP/HTTPS forgalomhoz
+            \item Network Load Balancer (NLB): TCP/UDP forgalomhoz
+            \item Classic Load Balancer: Régebbi, általános célú terheléselosztó
+        \end{itemize}
+    \end{itemize}
+
+    \subsection{Biztonság és hálózatkezelés}
+
+    \subsubsection{Amazon Virtual Private Cloud (VPC)}
+
+    \begin{itemize}
+        \item Izolált virtuális hálózat az AWS felhőben
+        \item Teljes kontroll az IP-címtartomány, alhálózatok, routing táblák és hálózati átjárók felett
+        \item Lehetőség a helyi adatközponttal való biztonságos összekapcsolásra (VPN vagy Direct Connect)
+    \end{itemize}
+
+    \subsubsection{Security Groups}
+
+    \begin{itemize}
+        \item Virtuális tűzfal az EC2 instance-ok védelmére
+        \item Szabályok definiálása a bejövő és kimenő forgalomra
+        \item Stateful működés: a bejövő forgalomra adott válasz automatikusan engedélyezett
+    \end{itemize}
+
+    \subsubsection{Identity and Access Management (IAM)}
+
+    \begin{itemize}
+        \item Felhasználók és jogosultságok kezelése
+        \item Részletes hozzáférés-vezérlés az AWS erőforrásokhoz
+        \item Multi-Factor Authentication (MFA) támogatása
+    \end{itemize}
+
+    \subsubsection{AWS CloudTrail}
+
+    \begin{itemize}
+        \item API-hívások naplózása és monitorozása
+        \item Segít a biztonsági elemzésben és hibaelhárításban
+        \item Megfelelőségi ellenőrzések támogatása
+    \end{itemize}
+
+    \subsection{EC2 Instance optimalizálás és teljesítményhangolás}
+
+    \subsubsection{Instance méretezés}
+
+    \begin{itemize}
+        \item \textbf{Vertikális skálázás (scale up/down):}
+        \begin{itemize}
+            \item Instance típus módosítása nagyobb vagy kisebb erőforrásokkal
+            \item Leállítás szükséges a módosításhoz
+        \end{itemize}
+        \item \textbf{Horizontális skálázás (scale out/in):}
+        \begin{itemize}
+            \item Több instance indítása vagy leállítása
+            \item Auto Scaling használata az automatizáláshoz
+        \end{itemize}
+    \end{itemize}
+
+    \subsubsection{Teljesítmény optimalizálás}
+
+    \begin{itemize}
+        \item \textbf{Enhanced Networking:} Nagyobb sávszélesség és alacsonyabb latencia
+        \item \textbf{Placement Groups:} Instance-ok csoportosítása alacsony latenciájú kommunikációhoz
+        \item \textbf{EC2 Nitro System:} Dedikált hardveres virtualizáció jobb teljesítményért
+    \end{itemize}
+
+    \subsection{EC2 költségoptimalizálás}
+
+    \subsubsection{Árazási modellek}
+
+    \begin{itemize}
+        \item \textbf{On-Demand Instances:} Rugalmas, óránkénti vagy másodpercenkénti díjazás
+        \item \textbf{Reserved Instances:} Előre foglalt kapacitás jelentős kedvezménnyel
+        \item \textbf{Spot Instances:} Kihasználatlan EC2 kapacitás alacsony áron, de megszakítható
+        \item \textbf{Savings Plans:} Rugalmas árazási modell elkötelezett használatra
+    \end{itemize}
+
+    \subsubsection{Költségcsökkentési stratégiák}
+
+    \begin{itemize}
+        \item Megfelelő instance típus és méret kiválasztása
+        \item Kihasználatlan erőforrások azonosítása és leállítása
+        \item Auto Scaling használata a terheléshez igazodó kapacitásért
+        \item Spot Instances használata megszakítható munkaterhelésekhez
+    \end{itemize}
+
+    \subsection{Adatkezelés és tárolás optimalizálás}
+
+    \subsubsection{EBS optimalizálás}
+
+    \begin{itemize}
+        \item \textbf{IOPS és átviteli sebesség hangolása:} Megfelelő EBS típus kiválasztása
+        \item \textbf{EBS Multi-Attach:} Több EC2 instance csatlakoztatása ugyanahhoz az EBS kötethez
+        \item \textbf{EBS Snapshots:} Inkrementális biztonsági mentések készítése
+    \end{itemize}
+
+    \subsubsection{Instance Store vs EBS}
+
+    \begin{itemize}
+        \item Instance Store: Ideiglenes, nagy teljesítményű tárolás
+        \item EBS: Perzisztens, rugalmas tárolás
+        \item Használati eset alapján történő választás (pl. adatbázisok EBS-en, gyorsítótárak Instance Store-on)
+    \end{itemize}
+
+    \subsection{Magas rendelkezésre állás és katasztrófa-elhárítás}
+
+    \subsubsection{Multi-AZ telepítés}
+
+    \begin{itemize}
+        \item Instance-ok elosztása több Availability Zone (AZ) között
+        \item Automatikus failover konfigurálása ELB és Auto Scaling segítségével
+    \end{itemize}
+
+    \subsubsection{Régiókon átívelő architektúra}
+
+    \begin{itemize}
+        \item Több AWS régió használata a globális redundancia érdekében
+        \item Route 53 használata a földrajzi alapú forgalomirányításhoz
+    \end{itemize}
+
+    \subsubsection{Backup és helyreállítás}
+
+    \begin{itemize}
+        \item Rendszeres EBS snapshots készítése
+        \item AMI-k létrehozása az instance-okról
+        \item AWS Backup szolgáltatás használata központosított mentéskezeléshez
+    \end{itemize}
+
+    \subsection{Monitorozás és menedzsment}
+
+    \subsubsection{Amazon CloudWatch}
+
+    \begin{itemize}
+        \item Metrikák gyűjtése és monitorozása (CPU, memória, hálózat, stb.)
+        \item Riasztások konfigurálása kritikus eseményekre
+        \item Automatikus műveletek indítása riasztások alapján (pl. Auto Scaling)
+    \end{itemize}
+
+    \subsubsection{AWS Systems Manager}
+
+    \begin{itemize}
+        \item Központosított menedzsment több EC2 instance-hoz
+        \item Patch menedzsment és konfigurációkezelés
+        \item Automatizált feladatok végrehajtása több instance-on
+    \end{itemize}
+
+    \subsection{Konténerizáció és mikroszolgáltatások}
+
+    \subsubsection{Amazon ECS (Elastic Container Service)}
+
+    \begin{itemize}
+        \item Docker konténerek futtatása és kezelése EC2 instance-okon
+        \item Integrálás más AWS szolgáltatásokkal (pl. ELB, VPC)
+    \end{itemize}
+
+    \subsubsection{Amazon EKS (Elastic Kubernetes Service)}
+
+    \begin{itemize}
+        \item Menedzselt Kubernetes szolgáltatás
+        \item Konténerizált alkalmazások egyszerű telepítése és kezelése
+    \end{itemize}
+
+    \subsection{Hibrid és multi-cloud megoldások}
+
+    \subsubsection{AWS Outposts}
+
+    \begin{itemize}
+        \item AWS infrastruktúra és szolgáltatások helyi adatközpontban
+        \item Egységes működés az AWS felhővel
+    \end{itemize}
+
+    \subsubsection{VMware Cloud on AWS}
+
+    \begin{itemize}
+        \item VMware környezetek futtatása AWS infrastruktúrán
+        \item Zökkenőmentes migráció és hibrid működés
+    \end{itemize}
+
+    \subsection{Fejlesztői produktivitás és CI/CD}
+
+    \subsubsection{AWS CodeDeploy}
+
+    \begin{itemize}
+        \item Automatizált alkalmazás-telepítés EC2 instance-okra
+        \item Támogatja a folyamatos integrációt és folyamatos szállítást (CI/CD)
+    \end{itemize}
+
+    \subsubsection{AWS CloudFormation}
+
+    \begin{itemize}
+        \item Infrastruktúra mint kód (IaC) megoldás
+        \item Teljes AWS környezet leírása és automatizált létrehozása
+    \end{itemize}
+
+    \newpage
+
+
+    \section{Magas rendelkezésre állás, terheléselosztás és automatikus skálázás az AWS-ben}
+
+    \subsection{Bevezetés a magas rendelkezésre állásba AWS környezetben}
+
+    A magas rendelkezésre állás (High Availability, HA) azt jelenti, hogy egy rendszer folyamatosan működőképes és elérhető, minimalizálva a leállások időtartamát és gyakoriságát\footnote{Forrás: cloud.pdf, 191-193. dia}.
+
+    \subsubsection{AWS infrastruktúra alapjai}
+
+    \begin{itemize}
+        \item \textbf{Régiók:} Földrajzilag elkülönült területek, amelyek több Availability Zone-t tartalmaznak
+        \item \textbf{Availability Zone-ok (AZ):} Egy régión belüli, egymástól független adatközpontok
+        \item \textbf{Edge Location-ök:} CDN (Content Delivery Network) végpontok a gyorsabb tartalom-kiszolgáláshoz
+    \end{itemize}
+
+    \subsubsection{Magas rendelkezésre állás alapelvei az AWS-ben}
+
+    \begin{itemize}
+        \item \textbf{Hibatűrés:} Rendszer képessége a komponensek meghibásodásának elviselésére
+        \item \textbf{Redundancia:} Kritikus komponensek többszörözése
+        \item \textbf{Automatikus helyreállítás:} Hibák automatikus detektálása és javítása
+        \item \textbf{Skálázhatóság:} Rendszer képessége a növekvő terhelés kezelésére
+    \end{itemize}
+
+    \subsection{Terheléselosztás az AWS-ben}
+
+    Az AWS Elastic Load Balancing (ELB) szolgáltatása biztosítja a terheléselosztást a bejövő forgalom egyenletes elosztásával több számítási erőforrás között.
+
+    \subsubsection{ELB típusok}
+
+    \begin{itemize}
+        \item \textbf{Application Load Balancer (ALB):}
+        \begin{itemize}
+            \item HTTP és HTTPS forgalom kezelésére optimalizált
+            \item Támogatja az útvonalapú útválasztást és a mikroszolgáltatás architektúrákat
+            \item Alkalmazás rétegben (OSI 7. réteg) működik
+        \end{itemize}
+
+        \item \textbf{Network Load Balancer (NLB):}
+        \begin{itemize}
+            \item TCP, UDP és TLS forgalom kezelésére
+            \item Rendkívül alacsony latencia és magas teljesítmény
+            \item Hálózati rétegben (OSI 4. réteg) működik
+        \end{itemize}
+
+        \item \textbf{Classic Load Balancer (CLB):}
+        \begin{itemize}
+            \item Régebbi generációs terheléselosztó
+            \item HTTP/HTTPS és TCP forgalom kezelésére
+            \item Egyszerűbb alkalmazásokhoz ajánlott
+        \end{itemize}
+    \end{itemize}
+
+    \subsubsection{ELB főbb jellemzők}
+
+    \begin{itemize}
+        \item \textbf{Egészség ellenőrzés:} Rendszeres ellenőrzések a backend instance-ok állapotáról
+        \item \textbf{Sticky sessions:} Felhasználói munkamenetek irányítása ugyanarra az instance-ra
+        \item \textbf{SSL/TLS kezelés:} Titkosított kommunikáció támogatása
+        \item \textbf{Zónák közötti terheléselosztás:} Forgalom elosztása több Availability Zone között
+    \end{itemize}
+
+    \subsection{Automatikus skálázás az AWS-ben}
+
+    Az AWS Auto Scaling lehetővé teszi az alkalmazások automatikus skálázását a terhelés változásának megfelelően.
+
+    \subsubsection{Auto Scaling komponensek}
+
+    \begin{itemize}
+        \item \textbf{Launch Configuration/Launch Template:}
+        \begin{itemize}
+            \item EC2 instance-ok indításához szükséges beállítások sablonja
+            \item AMI, instance típus, biztonsági csoportok, stb. meghatározása
+        \end{itemize}
+
+        \item \textbf{Auto Scaling Group (ASG):}
+        \begin{itemize}
+            \item EC2 instance-ok logikai csoportja
+            \item Meghatározza a minimum, maximum és kívánt kapacitást
+        \end{itemize}
+
+        \item \textbf{Scaling Policy:}
+        \begin{itemize}
+            \item Szabályok a csoport méretének dinamikus módosítására
+            \item Alapulhat metrikákon (pl. CPU használat) vagy időzítésen
+        \end{itemize}
+    \end{itemize}
+
+    \subsubsection{Skálázási stratégiák}
+
+    \begin{itemize}
+        \item \textbf{Dinamikus skálázás:} Automatikus méretezés metrikák alapján
+        \item \textbf{Prediktív skálázás:} Gépi tanulás alapú előrejelzés és proaktív skálázás
+        \item \textbf{Ütemezett skálázás:} Előre meghatározott időpontokban történő méretezés
+        \item \textbf{Step scaling:} Lépcsőzetes kapacitásnövelés vagy -csökkentés
+    \end{itemize}
+
+    \subsection{Magas rendelkezésre állás megvalósítása}
+
+    \subsubsection{Multi-AZ telepítés}
+
+    \begin{itemize}
+        \item Erőforrások elosztása több Availability Zone között
+        \item Automatikus failover konfigurálása
+        \item Alkalmazható EC2, RDS, ElastiCache és más szolgáltatásokra
+    \end{itemize}
+
+    \subsubsection{Régiókon átívelő architektúra}
+
+    \begin{itemize}
+        \item Alkalmazás telepítése több AWS régióba
+        \item AWS Global Accelerator használata a régiók közötti forgalom optimalizálására
+        \item Route 53 használata a földrajzi alapú forgalomirányításhoz
+    \end{itemize}
+
+    \subsubsection{Adatbázis magas rendelkezésre állása}
+
+    \begin{itemize}
+        \item \textbf{Amazon RDS Multi-AZ:} Szinkron replikáció két AZ között
+        \item \textbf{Amazon Aurora:} Elosztott, öngyógyító tárolórendszer
+        \item \textbf{DynamoDB globális táblák:} Több régióban szinkronizált NoSQL adatbázis
+    \end{itemize}
+
+    \subsubsection{Stateless alkalmazás architektúra}
+
+    \begin{itemize}
+        \item Állapotinformációk tárolása külső szolgáltatásokban (pl. ElastiCache, DynamoDB)
+        \item Könnyebb skálázhatóság és hibatűrés
+    \end{itemize}
+
+    \subsection{Monitoring és hibaelhárítás}
+
+    \subsubsection{Amazon CloudWatch}
+
+    \begin{itemize}
+        \item Metrikák gyűjtése és monitorozása
+        \item Riasztások konfigurálása
+        \item Automatikus műveletek indítása (pl. Auto Scaling triggerelése)
+    \end{itemize}
+
+    \subsubsection{AWS X-Ray}
+
+    \begin{itemize}
+        \item Elosztott alkalmazások elemzése és hibakeresése
+        \item Szolgáltatások közötti függőségek vizualizálása
+    \end{itemize}
+
+    \subsubsection{Amazon CloudTrail}
+
+    \begin{itemize}
+        \item API-hívások naplózása
+        \item Biztonsági elemzés és hibaelhárítás támogatása
+    \end{itemize}
+
+    \subsection{Best practices a magas rendelkezésre állás eléréséhez}
+
+    \begin{itemize}
+        \item \textbf{Tervezés a hibákra:} Feltételezni, hogy minden komponens meghibásodhat
+        \item \textbf{Automatizálás:} Emberi beavatkozás minimalizálása
+        \item \textbf{Loose coupling:} Komponensek közötti függőségek csökkentése
+        \item \textbf{Idempotens műveletek:} Többszöri végrehajtás esetén is azonos eredmény
+        \item \textbf{Folyamatos tesztelés:} Rendszeres chaos engineering és disaster recovery gyakorlatok
+    \end{itemize}
+
+    \subsection{Költségoptimalizálás a magas rendelkezésre állás mellett}
+
+    \begin{itemize}
+        \item Megfelelő instance típusok és méretek kiválasztása
+        \item Spot Instances használata nem kritikus workload-okhoz
+        \item Auto Scaling a valós igényekhez igazodva
+        \item Reserved Instances vagy Savings Plans használata a tartós workload-okhoz
+    \end{itemize}
+
+    \newpage
+
+
+    \section{Microsoft Azure / PaaS megoldások: jellemzők, alapkoncepciók és mechanizmusok (adatbázisok)}
+
+    \subsection{Bevezetés az Azure PaaS megoldásokba}
+
+    A Microsoft Azure Platform as a Service (PaaS) megoldásai lehetővé teszik a fejlesztők számára, hogy az infrastruktúra kezelése nélkül koncentrálhassanak az alkalmazások fejlesztésére és üzemeltetésére\footnote{Forrás: cloud.pdf, 216-220. dia}.
+
+    \subsubsection{Azure PaaS előnyei}
+
+    \begin{itemize}
+        \item \textbf{Gyors fejlesztés és telepítés:} Előre konfigurált fejlesztői környezetek
+        \item \textbf{Skálázhatóság:} Automatikus vagy könnyen konfigurálható skálázás
+        \item \textbf{Költséghatékonyság:} Csak a felhasznált erőforrásokért kell fizetni
+        \item \textbf{Magas rendelkezésre állás:} Beépített redundancia és hibatűrés
+        \item \textbf{Biztonság:} Microsoft által kezelt biztonsági frissítések és megfelelőség
+    \end{itemize}
+
+    \subsection{Azure SQL Database}
+
+    Az Azure SQL Database egy teljesen menedzselt relációs adatbázis-szolgáltatás, amely a Microsoft SQL Server motorján alapul.
+
+    \subsubsection{Főbb jellemzők}
+
+    \begin{itemize}
+        \item \textbf{Automatikus skálázás:} Dinamikus erőforrás-allokáció a terhelés alapján
+        \item \textbf{Beépített intelligencia:} Teljesítmény-hangolási javaslatok és automatikus optimalizálás
+        \item \textbf{Geo-replikáció:} Adatok replikálása különböző régiókba a magas rendelkezésre állás érdekében
+        \item \textbf{Biztonsági funkciók:} Titkosítás, auditing, fenyegetés-észlelés
+    \end{itemize}
+
+    \subsubsection{Üzembe helyezési modellek}
+
+    \begin{itemize}
+        \item \textbf{Single Database:} Önálló, teljesen menedzselt adatbázis
+        \item \textbf{Elastic Pool:} Több adatbázis erőforrásainak megosztása költséghatékony módon
+        \item \textbf{Managed Instance:} Teljes SQL Server példány funkcionalitás, nagyobb kompatibilitás
+    \end{itemize}
+
+    \subsubsection{Teljesítmény-beállítások}
+
+    \begin{itemize}
+        \item \textbf{DTU (Database Transaction Unit):} Kombinált CPU, memória és I/O mérték
+        \item \textbf{vCore modell:} Rugalmas erőforrás-konfiguráció virtuális magok alapján
+    \end{itemize}
+
+    \subsection{Azure Cosmos DB}
+
+    Az Azure Cosmos DB egy globálisan elosztott, többmodelles NoSQL adatbázis-szolgáltatás.
+
+    \subsubsection{Főbb jellemzők}
+
+    \begin{itemize}
+        \item \textbf{Globális elosztás:} Automatikus és transzparens adatreplikáció világszerte
+        \item \textbf{Többmodelles:} Támogatja a dokumentum, kulcs-érték, gráf és oszlopos adatmodelleket
+        \item \textbf{Többféle API:} SQL, MongoDB, Cassandra, Gremlin, Table API támogatás
+        \item \textbf{Automatikus skálázás:} Rugalmas áteresztőképesség és tárhely skálázás
+        \item \textbf{Konzisztencia-szintek:} 5 jól definiált konzisztencia-szint közötti választás
+    \end{itemize}
+
+    \subsubsection{Particionálás}
+
+    \begin{itemize}
+        \item \textbf{Logikai partíciók:} Adatok elosztása a partíciós kulcs alapján
+        \item \textbf{Fizikai partíciók:} Automatikus kezelés az Azure által
+    \end{itemize}
+
+    \subsubsection{Teljesítmény és költségek}
+
+    \begin{itemize}
+        \item \textbf{Request Units (RU):} Egységesített teljesítménymérték
+        \item \textbf{Autoscale:} Automatikus RU skálázás a terhelés alapján
+    \end{itemize}
+
+    \subsection{Azure Database for MySQL, PostgreSQL és MariaDB}
+
+    Azure teljesen menedzselt verziókat kínál a népszerű nyílt forráskódú adatbázis-motorokhoz.
+
+    \subsubsection{Közös jellemzők}
+
+    \begin{itemize}
+        \item \textbf{Automatikus biztonsági mentés:} Pont-in-time helyreállítás támogatása
+        \item \textbf{Magas rendelkezésre állás:} Beépített failover mechanizmusok
+        \item \textbf{Skálázhatóság:} Vertikális és (PostgreSQL esetében) horizontális skálázási lehetőségek
+        \item \textbf{Biztonsági funkciók:} SSL kapcsolatok, tűzfalszabályok, VNet integrációs
+    \end{itemize}
+
+    \subsubsection{Üzembe helyezési opciók}
+
+    \begin{itemize}
+        \item \textbf{Single Server:} Alap konfiguráció kisebb alkalmazásokhoz
+        \item \textbf{Flexible Server (PostgreSQL):} Nagyobb kontrollt és testreszabhatóságot biztosít
+        \item \textbf{Hyperscale (Citus) for PostgreSQL:} Horizontális skálázás nagy adatbázisokhoz
+    \end{itemize}
+
+    \subsection{Azure Synapse Analytics}
+
+    Az Azure Synapse Analytics egy integrált elemzési szolgáltatás, amely egyesíti a big data és az adattárház képességeket.
+
+    \subsubsection{Főbb komponensek}
+
+    \begin{itemize}
+        \item \textbf{SQL Pool:} Elosztott SQL lekérdezési motor nagy mennyiségű adathoz
+        \item \textbf{Spark Pool:} Apache Spark integráció big data feldolgozáshoz
+        \item \textbf{Data Lake Analytics:} Adattó elemzés és ETL műveletek
+        \item \textbf{Synapse Studio:} Integrált fejlesztői környezet
+    \end{itemize}
+
+    \subsubsection{Teljesítmény-jellemzők}
+
+    \begin{itemize}
+        \item \textbf{MPP (Massively Parallel Processing):} Párhuzamos adatfeldolgozás
+        \item \textbf{Columnstore indexek:} Hatékony adattömörítés és lekérdezés-teljesítmény
+        \item \textbf{Workload management:} Erőforrások dinamikus allokálása a különböző munkafolyamatokhoz
+    \end{itemize}
+
+    \subsection{Azure Database Migration Service}
+
+    Az Azure Database Migration Service segít a helyszíni adatbázisok Azure-ba történő migrálásában.
+
+    \subsubsection{Támogatott forráso és célok}
+
+    \begin{itemize}
+        \item \textbf{Források:} SQL Server, MySQL, PostgreSQL, Oracle, stb.
+        \item \textbf{Célok:} Azure SQL Database, Azure SQL Managed Instance, Azure Cosmos DB, stb.
+    \end{itemize}
+
+    \subsubsection{Migrációs módszerek}
+
+    \begin{itemize}
+        \item \textbf{Offline migráció:} Adatok egyszeri átvitele, alkalmazás leállással jár
+        \item \textbf{Online migráció:} Folyamatos szinkronizálás, minimális állásidő
+        \item \textbf{Hybrid migráció:} Offline és online módszerek kombinálása
+    \end{itemize}
+
+    \subsection{Biztonsági és teljesítmény optimalizálási megoldások}
+
+    \subsubsection{Biztonsági funkciók}
+
+    \begin{itemize}
+        \item \textbf{Azure Active Directory integráció:} Központosított identitáskezelés
+        \item \textbf{Transparent Data Encryption (TDE):} Adatok titkosítása nyugalmi állapotban
+        \item \textbf{Dynamic Data Masking:} Érzékeny adatok automatikus maszkolása
+        \item \textbf{Azure Defender for SQL:} Fejlett fenyegetés-észlelés és -védelem
+    \end{itemize}
+
+    \subsubsection{Teljesítmény optimalizálás}
+
+    \begin{itemize}
+        \item \textbf{Query Performance Insight:} Lekérdezés-teljesítmény elemzése és javaslatok
+        \item \textbf{Automatic Tuning:} Indexek és lekérdezés-tervek automatikus optimalizálása
+        \item \textbf{Intelligent Performance:} AI-alapú teljesítmény-hangolási javaslatok
+        \item \textbf{In-Memory technológiák:} Memória-optimalizált táblák és indexek támogatása
+    \end{itemize}
+
+    \subsection{Összehasonlítás és választási szempontok}
+
+    \begin{itemize}
+        \item \textbf{Adatmodell:} Relációs vs NoSQL igények
+        \item \textbf{Skálázhatóság:} Vertikális vs horizontális skálázási követelmények
+        \item \textbf{Globális elérhetőség:} Több régióban való jelenlét szükségessége
+        \item \textbf{Konzisztencia vs rendelkezésre állás:} CAP tétel szerinti prioritások
+        \item \textbf{Teljesítmény-követelmények:} OLTP vs OLAP munkaterhelések
+        \item \textbf{Költségek:} Pay-as-you-go vs előre lefoglalt kapacitás modellek
+    \end{itemize}
+
+\end{document}
